@@ -14,6 +14,10 @@ module.exports = {
       red: colors.rose,
       pink: colors.fuchsia,
       white: colors.white,
+      yellow: colors.yellow,
+      green: colors.green,
+      emerald: colors.emerald,
+      cyan: colors.cyan
     },
     fontFamily: {
       sans: ['Poppins', 'serif'],

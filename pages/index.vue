@@ -1,49 +1,41 @@
 <template>
-  <div class="container">
-    <div></div>
+  <div class="w-screen h-max mx-6">
+    <p class="text-2xl my-4">Exams</p>
+    <div class="flex w-screen">
+      <exam-card
+        class="mr-4"
+        name="Software Engineer"
+        :skills="['Javascript', 'Python']"
+        :applications="15"
+      />
+      <exam-card
+        class="mr-4"
+        name="Founding Engineer"
+        :skills="['WASM', 'Rust']"
+        :applications="142"
+      />
+      <button
+        class="mx-4 bg-gray-400 w-28 h-12 text-center self-center rounded-md"
+      >
+        See more...
+      </button>
+    </div>
+    <p class="text-2xl my-4">Candidates</p>
+    <div class="flex w-screen">
+      <div>El bis</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import ExamCard from "@/components/ExamCard.vue";
 
-export default Vue.extend({});
+export default Vue.extend({
+  components: {
+    ExamCard
+  }
+});
 </script>
 
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
+<style></style>
