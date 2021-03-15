@@ -22,7 +22,11 @@
     </div>
     <p class="text-2xl my-4">Candidates</p>
     <div class="flex w-screen">
-      <div>El bis</div>
+      <candidate-card
+        name="Bismarck Lepe"
+        job="Founding Engineer"
+        :score="95"
+      />
     </div>
   </div>
 </template>
@@ -30,6 +34,7 @@
 <script lang="ts">
 import Vue from "vue";
 import ExamCard from "@/components/ExamCard.vue";
+import CandidateCard from "@/components/CandidateCard.vue";
 
 export default Vue.extend({
   components: {
