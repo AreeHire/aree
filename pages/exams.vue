@@ -1,8 +1,8 @@
 <template>
-  <div class="h-max mx-6">
+  <div class="h-screen">
     <div class="flex justify-between items-center">
       <Title text="Exams" />
-      <button class="bg-gray-400 text-lg p-2 rounded-md p-1">
+      <button class="bg-gray-400 text-lg rounded-md p-2">
         + Create
       </button>
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <div class="w-screen h-max mx-6">
-    <p class="text-2xl my-4">Exams</p>
-    <div class="flex w-screen">
+  <div class="h-screen">
+    <p class="text-2xl">Exams</p>
+    <div class="flex w-screen mt-4">
       <exam-card
         class="w-1/3"
         name="Software Engineer"
