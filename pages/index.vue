@@ -3,11 +3,13 @@
     <p class="text-2xl my-4">Exams</p>
     <div class="flex w-screen">
       <exam-card
+        class="w-1/3"
         name="Software Engineer"
         :skills="['Javascript', 'Python']"
         :applications="15"
       />
       <exam-card
+        class="w-1/3"
         name="Founding Engineer"
         :skills="['WASM', 'Rust']"
         :applications="142"
