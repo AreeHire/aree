@@ -4,8 +4,8 @@
   >
     <div class="flex items-center">
       <p class="text-3xl pl-6 pr-8">Aree</p>
-      <a class="text-lg px-5" href="#"> Dashboard </a>
-      <a class="text-lg px-5" href="#"> Exams </a>
+      <a class="text-lg px-5" href="/"> Dashboard </a>
+      <a class="text-lg px-5" href="/exams"> Exams </a>
       <a class="text-lg px-5" href="#"> Candidates </a>
     </div>
     <div>

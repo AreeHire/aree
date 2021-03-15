@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-1/3 flex flex-row border-2 border-black rounded-xl p-4 cursor-pointer hover:bg-gray-100"
+    class="mr-4 flex flex-row border-2 border-black rounded-xl p-4 cursor-pointer hover:bg-gray-100"
   >
     <div
       class="w-16 h-16 flex justify-center items-center rounded-full bg-gray-900 text-white mr-4"
@@ -15,7 +15,7 @@
       <span
         v-for="skill in skills"
         :key="skill"
-        class="bg-gray-300 px-2 mx-1 rounded"
+        class="bg-gray-300 px-2 mr-1 rounded"
       >
         {{ skill }}
       </span>
