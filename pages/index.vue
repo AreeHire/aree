@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen">
+  <div>
     <p class="text-2xl">Exams</p>
-    <div class="flex w-screen mt-4">
+    <div class="flex mt-4">
       <exam-card
         class="w-1/3"
         name="Software Engineer"
@@ -20,8 +20,8 @@
         See more...
       </button>
     </div>
-    <p class="text-2xl my-4">Candidates (ordered by score)</p>
-    <div class="flex w-screen flex flex-col">
+    <p class="text-2xl my-4">Outstanding Candidates</p>
+    <div class="">
       <candidate-card name="Luis Argumedo" job="WASM Engineer" :score="100" />
       <candidate-card
         name="Bismarck Lepe"
@@ -29,6 +29,9 @@
         :score="95"
       />
       <candidate-card name="Mauricio Aguilar" job="UX Designer" :score="95" />
+      <button class="bg-gray-400 w-28 h-12 text-center self-center rounded-md">
+        See more...
+      </button>
     </div>
   </div>
 </template>
@@ -40,7 +43,8 @@ import CandidateCard from "@/components/CandidateCard.vue";
 
 export default Vue.extend({
   components: {
-    ExamCard
+    ExamCard,
+    CandidateCard
   }
 });
 </script>

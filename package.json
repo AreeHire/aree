@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.1",
+    "@nuxtjs/firebase": "^7.5.0",
     "autoprefixer": "^9.8.6",
     "core-js": "^3.8.3",
+    "firebase": "^4.8.0",
     "nuxt": "^2.14.12",
     "postcss": "^7.0.35",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.12",

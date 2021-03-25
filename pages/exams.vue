@@ -1,32 +1,35 @@
 <template>
-  <div class="h-screen">
+  <div>
     <div class="flex justify-between items-center">
       <Title text="Exams" />
-      <button class="bg-gray-400 text-lg rounded-md p-2">
+      <button
+        class="bg-gray-400 text-lg rounded-md p-2"
+        @click="displayCreateModal"
+      >
         + Create
       </button>
     </div>
-    <div class="flex flex-row flex-wrap w-full h-max justify-between">
+    <div class="flex flex-col h-max">
       <exam-card
-        class="w-1/2 mb-4"
+        class="w-1/3 mb-4"
         name="Software Engineer"
         :skills="['Javascript', 'Python']"
         :applications="15"
       />
       <exam-card
-        class="w-1/2 mb-4"
+        class="w-1/3 mb-4"
         name="Founding Engineer"
         :skills="['WASM', 'Rust']"
         :applications="142"
       />
       <exam-card
-        class="w-1/2 mb-4"
+        class="w-1/3 mb-4"
         name="Founding Engineer"
         :skills="['WASM', 'Rust']"
         :applications="142"
       />
       <exam-card
-        class="w-1/2 mb-4"
+        class="w-1/3 mb-4"
         name="Founding Engineer"
         :skills="['WASM', 'Rust']"
         :applications="142"
@@ -40,6 +43,11 @@ import Vue from "vue";
 import Title from "@/components/Title.vue";
 
 export default Vue.extend({
-  components: { Title }
+  components: { Title },
+  methods: {
+    displayCreateModal: function() {
+      this.$emit("openModal");
+    }
+  }
 });
 </script>

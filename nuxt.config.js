@@ -49,10 +49,28 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: 'AIzaSyCpB0-I0ZwuJODKBhzmDFcj2EHwLQV6wFo',
+          authDomain: 'hire-latam.firebaseapp.com',
+          projectId: 'hire-latam',
+          storageBucket: 'hire-latam.appspot.com',
+          messagingSenderId: '1062476652280',
+          appId: '1:1062476652280:web:6abf1cceb1dc005923650d',
+          measurementId: 'G-P3TBWV2CEY'
+        },
+        services: {
+          firestore: true
+        }
+      }
+    ]
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
 
   },
+  loading: true
 }

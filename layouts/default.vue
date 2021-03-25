@@ -11,6 +11,11 @@ import Navbar from "../components/Navbar.vue";
 export default {
   components: {
     Navbar
+  },
+  methods: {
+    render: function() {
+      console.log("Saludos cordiales");
+    }
   }
 };
 </script>
