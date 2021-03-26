@@ -2,10 +2,7 @@
   <div>
     <div class="flex justify-between items-center">
       <Title text="Exams" />
-      <button
-        class="bg-gray-400 text-lg rounded-md p-2"
-        @click="displayCreateModal"
-      >
+      <button class="bg-gray-400 text-lg rounded-md p-2">
         + Create
       </button>
     </div>
@@ -44,11 +41,6 @@ import Title from "@/components/Title.vue";
 import ExamCard from "@/components/ExamCard.vue";
 
 export default Vue.extend({
-  components: { Title, ExamCard },
-  methods: {
-    displayCreateModal: function() {
-      this.$store.commit("modals/SHOW_MODAL");
-    }
-  }
+  components: { Title, ExamCard }
 });
 </script>
