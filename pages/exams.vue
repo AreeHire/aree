@@ -41,12 +41,13 @@
 <script lang="ts">
 import Vue from "vue";
 import Title from "@/components/Title.vue";
+import ExamCard from "@/components/ExamCard.vue";
 
 export default Vue.extend({
-  components: { Title },
+  components: { Title, ExamCard },
   methods: {
     displayCreateModal: function() {
-      this.$emit("openModal");
+      this.$store.commit("modals/SHOW_MODAL");
     }
   }
 });

@@ -1,5 +1,6 @@
 <template>
   <div class="font-serif">
+    <Modal v-if="activeModal" />
     <Navbar />
     <Nuxt class="pl-44 mx-6 pt-4" />
   </div>
@@ -7,14 +8,16 @@
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import Modal from "../components/Modal.vue";
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    Modal
   },
-  methods: {
-    render: function() {
-      console.log("Saludos cordiales");
+  computed: {
+    activeModal() {
+      return this.$store.state.modals.activeModal;
     }
   }
 };
