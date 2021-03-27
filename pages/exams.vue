@@ -2,9 +2,11 @@
   <div>
     <div class="flex justify-between items-center">
       <Title text="Exams" />
-      <button class="bg-gray-400 text-lg rounded-md p-2">
-        + Create
-      </button>
+      <a href="/create_exam">
+        <button class="bg-blue-500 text-white text-lg rounded-md p-2">
+          Create
+        </button>
+      </a>
     </div>
     <div class="flex flex-col h-max">
       <exam-card

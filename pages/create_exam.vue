@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Title from "@/components/Title.vue";
 import SkillCard from "@/components/SkillCard.vue";
 
@@ -53,14 +54,10 @@ export default {
       this.selected = language;
     },
     async createExam() {
-      const url = "http://localhost:5001/hire-latam/us-central1/createExam";
-      const response = await fetch(url, {
-        method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify({
-          name: this.exam,
-          language: this.selected
-        })
+      const url = "http://localhost:5001/hire-latam/us-central1/exams";
+      const response = await axios.post(url, {
+        name: this.exam,
+        language: this.selected
       });
     }
   }
