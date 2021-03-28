@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Title from "@/components/Title.vue";
 import ExamCard from "@/components/ExamCard.vue";
 
