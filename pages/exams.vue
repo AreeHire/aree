@@ -10,39 +10,37 @@
     </div>
     <div class="flex flex-col h-max">
       <exam-card
+        v-for="exam in exams"
         class="w-1/3 mb-4"
-        name="Software Engineer"
-        :skills="['Javascript', 'Python']"
+        :name="exam.name"
+        :key="exam.id"
+        :language="exam.language"
         :applications="15"
-      />
-      <exam-card
-        class="w-1/3 mb-4"
-        name="Founding Engineer"
-        :skills="['WASM', 'Rust']"
-        :applications="142"
-      />
-      <exam-card
-        class="w-1/3 mb-4"
-        name="Founding Engineer"
-        :skills="['WASM', 'Rust']"
-        :applications="142"
-      />
-      <exam-card
-        class="w-1/3 mb-4"
-        name="Founding Engineer"
-        :skills="['WASM', 'Rust']"
-        :applications="142"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import axios from "axios";
 import Title from "@/components/Title.vue";
 import ExamCard from "@/components/ExamCard.vue";
 
-export default Vue.extend({
-  components: { Title, ExamCard }
-});
+export default {
+  components: { Title, ExamCard },
+  data: function() {
+    return { exams: [] };
+  },
+  async fetch() {
+    this.exams = await getExams(this.$fire.firestore);
+  }
+};
+
+async function getExams() {
+  const url = `http://localhost:5001/hire-latam/us-central1/exams/`;
+
+  const response = await axios.get(url);
+  console.log(response.data);
+  return response.data;
+}
 </script>

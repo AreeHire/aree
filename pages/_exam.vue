@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import QuestionCard from "@/components/QuestionCard.vue";
 
 export default {
@@ -37,10 +38,10 @@ export default {
 };
 
 async function getJobs(firestore) {
-  let questionsRef = firestore.collection("questions");
-  const questionsSnapshot = await questionsRef.get();
-  return questionsSnapshot.docs.map(doc => {
-    return { id: doc.id, ...doc.data() };
-  });
+  const examId = "16000c18-c44b-49d3-bed4-f8056ec74a6c";
+  const url = `http://localhost:5001/hire-latam/us-central1/exams/${examId}`;
+
+  const response = await axios.get(url);
+  return response.data.questions;
 }
 </script>

@@ -12,12 +12,8 @@
       <p>
         <span class="text-green">{{ applications }}</span> Applicants
       </p>
-      <span
-        v-for="skill in skills"
-        :key="skill"
-        class="bg-gray-300 px-2 mr-1 rounded"
-      >
-        {{ skill }}
+      <span class="bg-gray-300 px-2 mr-1 rounded capitalize">
+        {{ language }}
       </span>
     </div>
   </div>
@@ -30,7 +26,7 @@ export default {
       type: String,
       required: true
     },
-    skills: {
+    language: {
       type: Array,
       required: true
     },
