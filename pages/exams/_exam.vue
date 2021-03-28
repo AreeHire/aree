@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import QuestionCard from "@/components/QuestionCard.vue";
 
 export default {
