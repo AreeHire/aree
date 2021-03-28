@@ -1,11 +1,6 @@
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  mode: 'universal',
-
-  // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Aree Hiring',
     htmlAttrs: {
@@ -27,14 +22,6 @@ export default {
       },
     ],
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
