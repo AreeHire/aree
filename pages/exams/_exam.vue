@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-xl mb-4">Questions (Preview Mode)</p>
+    <p class="text-xl mb-4">{{ name }} Questions (Preview Mode)</p>
     <template v-for="(question, index) in questions">
       <question-card
         class="mb-4"
@@ -22,23 +22,24 @@ export default {
   },
   data() {
     return {
+      name: "",
       questions: []
     };
   },
   async fetch() {
-    this.questions = await getExams(
-      this.$fire.firestore,
-      this.$axios,
-      this.exam
-    );
+    const exam = await getExam(this.$axios, this.exam);
+    console.warn(exam);
+
+    this.name = exam.name;
+    this.questions = exam.questions;
   },
   async asyncData({ params }) {
     return { exam: params.exam };
   }
 };
 
-async function getExams(firestore, axios, examId) {
+async function getExam(axios, examId) {
   const response = await axios.get(`/exams/${examId}`);
-  return response.data.questions;
+  return response.data;
 }
 </script>

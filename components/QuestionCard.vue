@@ -1,13 +1,15 @@
 <template>
   <div
-    class="mr-4 border-2 border-black rounded-xl p-4 hover:bg-gray-100"
+    class="border border-gray-400 rounded-xl p-4 "
   >
-    <p class="font-bold mb-1">{{ questionNumber }}. {{ question.name }}</p>
+    <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }} -
+      <span class="text-cyan-800 text-center">{{ questionType }}</span>
+    </p>
 
     <template v-if="question.type === 'single' || question.type === 'multiple'">
       <div :key="option.value" v-for="(option, index) in question.options">
         <input
-          :type="type"
+          :type="inputType"
           :key="option.value + index"
           :id="`question-${questionNumber}-${index}`"
           :name="`group-${questionNumber}`"
@@ -36,8 +38,17 @@ export default {
     }
   },
   computed: {
-    type: function () {
+    inputType: function () {
       return this.question.type === "single" ? "radio" : "checkbox"
+    },
+    questionType: function () {
+      const types = {
+        single: 'Single choice',
+        multiple: 'Multiple choice',
+        text: 'Free text'
+      };
+
+      return types[this.question.type]
     }
   }
 };
