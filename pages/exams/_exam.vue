@@ -27,17 +27,19 @@ export default {
     };
   },
   async fetch() {
-    this.questions = await getExams(this.$fire.firestore, this.exam);
+    this.questions = await getExams(
+      this.$fire.firestore,
+      this.$axios,
+      this.exam
+    );
   },
   async asyncData({ params }) {
     return { exam: params.exam };
   }
 };
 
-async function getExams(firestore, examId) {
-  const url = `http://localhost:5001/hire-latam/us-central1/exams/${examId}`;
-
-  const response = await axios.get(url);
+async function getExams(firestore, axios, examId) {
+  const response = await axios.get(`/exams/${examId}`);
   return response.data.questions;
 }
 </script>

@@ -35,14 +35,12 @@ export default {
     };
   },
   async fetch() {
-    this.exams = await getExams();
+    this.exams = await getExams(this.$axios);
   }
 };
 
-async function getExams() {
-  const url = `http://localhost:5001/hire-latam/us-central1/exams/`;
-
-  const response = await axios.get(url);
+async function getExams(axios) {
+  const response = await axios.get("/exams");
   return response.data;
 }
 </script>

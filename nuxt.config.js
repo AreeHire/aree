@@ -62,7 +62,8 @@ export default {
           firestore: true
         }
       }
-    ]
+    ],
+    '@nuxtjs/axios',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -73,6 +74,6 @@ export default {
   loading: true,
 
   axios: {
-    baseUrl: process.env.BASE_URL
+    baseUrl: process.env.API_URL
   }
 }

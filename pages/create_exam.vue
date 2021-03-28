@@ -54,9 +54,8 @@ export default {
       this.selected = language;
     },
     async createExam() {
-      const url = "http://localhost:5001/hire-latam/us-central1/exams";
       try {
-        const response = await axios.post(url, {
+        const response = await this.$axios.post("/exams", {
           name: this.exam,
           language: this.selected
         });
