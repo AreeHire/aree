@@ -33,7 +33,7 @@ export default {
     return { exams: [] };
   },
   async fetch() {
-    this.exams = await getExams(this.$fire.firestore);
+    this.exams = await getExams();
   }
 };
 
@@ -41,7 +41,6 @@ async function getExams() {
   const url = `http://localhost:5001/hire-latam/us-central1/exams/`;
 
   const response = await axios.get(url);
-  console.log(response.data);
   return response.data;
 }
 </script>

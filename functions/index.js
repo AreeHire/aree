@@ -41,11 +41,10 @@ app.post("/", async (req, res) => {
     questions: questions.filter(question => question.tags.indexOf(language) > -1)
   };
 
-  let examSnapshot;
   const examId = uuid4();
 
   try {
-    examSnapshot = await admin.firestore().collection("exam").doc(examId).set(exam);
+    await admin.firestore().collection("exam").doc(examId).set(exam);
   } catch (error) {
     return res.status(500).send({ error: "There was an error creating the exam" });
   }
