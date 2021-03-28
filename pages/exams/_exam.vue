@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-xl mb-4">Questions</p>
+    <p class="text-xl mb-4">Questions (Preview Mode)</p>
     <template v-for="(question, index) in questions">
       <question-card
         class="mb-4"
@@ -12,7 +12,7 @@
     </template>
     <button
       v-if="questions"
-      class="bg-cyan-300 w-28 h-12 text-center self-center rounded-md"
+      class="bg-blue-500 w-28 h-12 text-center self-center rounded-md text-white"
     >
       Submit ALV
     </button>

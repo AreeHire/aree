@@ -11,7 +11,7 @@
     <div class="flex flex-col h-max">
       <exam-card
         v-for="exam in exams"
-        class="w-1/3 mb-4"
+        class="w-1/2 mb-4"
         :key="exam.id"
         :id="exam.id"
         :name="exam.name"

@@ -55,10 +55,17 @@ export default {
     },
     async createExam() {
       const url = "http://localhost:5001/hire-latam/us-central1/exams";
-      const response = await axios.post(url, {
-        name: this.exam,
-        language: this.selected
-      });
+      try {
+        const response = await axios.post(url, {
+          name: this.exam,
+          language: this.selected
+        });
+
+        const { id: examId } = response.data;
+        this.$router.push(`/exams/${examId}`);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };
