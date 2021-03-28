@@ -16,17 +16,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
+<script>
 import ExamCard from "@/components/ExamCard.vue";
 import CandidateCard from "@/components/CandidateCard.vue";
 
-export default Vue.extend({
+export default {
   components: {
     ExamCard,
     CandidateCard
   }
-});
+};
 </script>
 
 <style></style>

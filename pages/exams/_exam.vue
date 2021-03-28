@@ -10,12 +10,6 @@
         :type="question.type"
       />
     </template>
-    <button
-      v-if="questions"
-      class="bg-blue-500 w-28 h-12 text-center self-center rounded-md text-white"
-    >
-      Submit ALV
-    </button>
   </div>
 </template>
 

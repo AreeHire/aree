@@ -22,15 +22,17 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import axios from "axios";
 import Title from "@/components/Title.vue";
 import ExamCard from "@/components/ExamCard.vue";
 
 export default {
   components: { Title, ExamCard },
-  data: function() {
-    return { exams: [] };
+  data() {
+    return {
+      exams: []
+    };
   },
   async fetch() {
     this.exams = await getExams();
