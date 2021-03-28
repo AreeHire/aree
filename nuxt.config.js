@@ -1,4 +1,6 @@
 export default {
+  mode: "universal",
+  ssr: false,
   target: 'static',
 
   head: {

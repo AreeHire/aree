@@ -5,9 +5,7 @@
     <div class="pt-4">
       <p class="text-3xl pl-6 pr-8">Aree</p>
       <div class="flex flex-col items-center">
-        <a class="text-lg mt-4" href="/"> Dashboard </a>
         <a class="text-lg mt-4" href="/exams"> Exams </a>
-        <a class="text-lg mt-4" href="#"> Templates </a>
         <a class="text-lg mt-4" href="#"> Candidates </a>
       </div>
     </div>
