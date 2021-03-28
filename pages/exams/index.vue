@@ -2,11 +2,11 @@
   <div>
     <div class="flex justify-between items-center">
       <Title text="Exams" />
-      <a href="/create_exam">
+      <NuxtLink to="/create_exam">
         <button class="bg-blue-500 text-white text-lg rounded-md p-2">
           Create
         </button>
-      </a>
+      </NuxtLink>
     </div>
     <div class="flex flex-col h-max">
       <exam-card

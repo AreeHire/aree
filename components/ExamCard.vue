@@ -1,5 +1,5 @@
 <template>
-  <a :href="'/exams/' + id">
+  <NuxtLink :to="'/exams/' + id">
     <div
       class="mr-4 flex flex-row border-2 border-gray-300 rounded-xl p-4 cursor-pointer hover:bg-gray-100"
     >
@@ -18,7 +18,7 @@
         </span>
       </div>
     </div>
-  </a>
+  </NuxtLink>
 </template>
 
 <script>
