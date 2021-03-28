@@ -11,7 +11,7 @@
       />
     </template>
     <button
-      v-if="questions.length"
+      v-if="questions"
       class="bg-cyan-300 w-28 h-12 text-center self-center rounded-md"
     >
       Submit ALV
@@ -33,12 +33,14 @@ export default {
     };
   },
   async fetch() {
-    this.questions = await getJobs(this.$fire.firestore);
+    this.questions = await getExams(this.$fire.firestore, this.exam);
+  },
+  async asyncData({ params }) {
+    return { exam: params.exam };
   }
 };
 
-async function getJobs(firestore) {
-  const examId = "16000c18-c44b-49d3-bed4-f8056ec74a6c";
+async function getExams(firestore, examId) {
   const url = `http://localhost:5001/hire-latam/us-central1/exams/${examId}`;
 
   const response = await axios.get(url);

@@ -1,25 +1,5 @@
 <template>
   <div>
-    <p class="text-2xl">Exams</p>
-    <div class="flex mt-4">
-      <exam-card
-        class="w-1/3"
-        name="Software Engineer"
-        :skills="['Javascript', 'Python']"
-        :applications="15"
-      />
-      <exam-card
-        class="w-1/3"
-        name="Founding Engineer"
-        :skills="['WASM', 'Rust']"
-        :applications="142"
-      />
-      <button
-        class="mx-4 bg-gray-400 w-28 h-12 text-center self-center rounded-md"
-      >
-        See more...
-      </button>
-    </div>
     <p class="text-2xl my-4">Outstanding Candidates</p>
     <div class="">
       <candidate-card name="Luis Argumedo" job="WASM Engineer" :score="100" />

@@ -12,8 +12,9 @@
       <exam-card
         v-for="exam in exams"
         class="w-1/3 mb-4"
-        :name="exam.name"
         :key="exam.id"
+        :id="exam.id"
+        :name="exam.name"
         :language="exam.language"
         :applications="15"
       />
