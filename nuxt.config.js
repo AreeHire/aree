@@ -1,17 +1,9 @@
 import axios from 'axios';
 
 export default {
+  mode: 'spa',
   ssr: false,
   target: 'static',
-  generate: {
-    routes: async function() {
-      const exams = await axios.get('/exams')
-      return [
-        ...exams.data.map(exam => `/exams/${exam.id}`),
-        ...exams.data.map(exam => `/apply/${exam.id}`),
-      ];
-    }
-  },
 
   head: {
     title: 'Aree Hiring',
