@@ -10,8 +10,11 @@
       <question-card
         v-if="currentQuestion"
         class="mb-4 w-full"
+        :key="index"
         :questionNumber="index + 1"
         :question="currentQuestion"
+        :value="currentAnswer"
+        @answered="handleAnswers"
       />
       <div class="flex flex-row justify-between w-full">
         <Button type="default" class="w-1/2 mr-4" @click="goToPrevious">
@@ -36,11 +39,17 @@ export default {
     Timer
   },
   data() {
-    return { name: "", questions: [], index: 0 };
+    return { name: "", questions: [], index: 0, answers: {} };
   },
   computed: {
     currentQuestion() {
       return this.questions[this.index];
+    },
+    currentAnswer() {
+      const answer = this.answers[this.index];
+      if (answer) return answer.value;
+
+      return [];
     }
   },
   methods: {
@@ -53,6 +62,10 @@ export default {
       if (this.index === this.questions.length - 1) return;
 
       this.index = this.index + 1;
+    },
+    handleAnswers(value) {
+      this.answers[this.index] = { value };
+      console.warn(this.answers);
     }
   },
   async fetch() {

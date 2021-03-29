@@ -4,13 +4,16 @@
   >
     <p class="text-cyan-700">{{ questionType }}</p>
     <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }} </p>
+    <p>{{answer}}</p>
 
     <template v-if="question.type === 'single' || question.type === 'multiple'">
       <div :key="option.value" v-for="(option, index) in question.options">
         <input
+          v-model="answer"
           :type="inputType"
           :key="option.value + index"
           :id="`question-${questionNumber}-${index}`"
+          :value="index"
           :name="`group-${questionNumber}`"
         ></input>
         <label class="cursor-pointer" :key="option.value" :for="`question-${questionNumber}-${index}`">
@@ -34,6 +37,17 @@ export default {
     question: {
       type: Object,
       required: true
+    },
+    value: {
+      required: false,
+    }
+  },
+  data() {
+    return { answer: this.value };
+  },
+  watch: {
+    answer(newValue, oldValue) {
+      this.$emit("answered", newValue);
     }
   },
   computed: {
