@@ -1,5 +1,9 @@
 <template>
-  <div class="flex justify-center h-screen">
+  <div v-if="submitted">
+    <p>Thanks for applying! Your score is {{ score }}</p>
+    <p>Our internal recruiter Alberto Romero will get in touch real soon!</p>
+  </div>
+  <div v-else class="flex justify-center h-screen">
     <div class="flex flex-col md:w-2/3 lg:w-1/2">
       <header
         class="w-full text-center text-xl pb-1 mb-4 border-b border-black-500"
@@ -39,7 +43,14 @@ export default {
     Timer
   },
   data() {
-    return { name: "", questions: [], index: 0, answers: {} };
+    return {
+      name: "",
+      questions: [],
+      index: 0,
+      answers: {},
+      score: 0,
+      submitted: false
+    };
   },
   computed: {
     currentQuestion() {
@@ -53,19 +64,32 @@ export default {
     }
   },
   methods: {
+    handleAnswers(value) {
+      this.answers[this.index] = { value };
+    },
     goToPrevious() {
       if (this.index === 0) return;
 
       this.index = this.index - 1;
     },
     goToNext() {
-      if (this.index === this.questions.length - 1) return;
+      if (this.index === this.questions.length - 1) {
+        const confirmed = window.confirm(
+          "Are you sure you want to submit this test?"
+        );
 
-      this.index = this.index + 1;
+        if (confirmed) this.submitExam();
+      } else {
+        this.index = this.index + 1;
+      }
     },
-    handleAnswers(value) {
-      this.answers[this.index] = { value };
-      console.warn(this.answers);
+    async submitExam() {
+      const result = await this.$axios.patch(`/exams/${this.exam}`, {
+        answers: this.answers
+      });
+
+      this.score = result.data.score;
+      this.submitted = true;
     }
   },
   async fetch() {

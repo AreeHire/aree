@@ -55,4 +55,71 @@ app.post("/", async (req, res) => {
     .send({ id: examId, exam });
 });
 
+app.patch("/:examId", async (req, res) => {
+  const { examId } = req.params;
+  const { answers } = req.body;
+
+  let examRef;
+  try {
+    examRef = await admin.firestore().collection("exam").doc(examId).get();
+  } catch (error) {
+    return res.status(404).send({ error: "Exam does not exist" });
+  }
+
+  const getScore = () => {
+    const exam = examRef.data();
+    const numberOfQuestions = exam.questions.length;
+    console.log("Start analyzing test");
+
+    const correctAnswers = exam.questions.reduce((acc, question, index) => {
+      if (question.type === "text") return acc;
+
+      let correctAnswer;
+      if (question.type === "multiple") {
+        correctAnswer = question.options.reduce((acc, option, index) => {
+          if (option.correct) acc.push(index);
+          return acc;
+        }, []);
+      } else if (question.type === "single") {
+        correctAnswer = question.options.findIndex(option => option.correct);
+      }
+
+      const currentAnswer = answers[index].value;
+
+      console.warn("Correct Answer", correctAnswer);
+      console.warn("Current Answer", currentAnswer);
+
+      if (Array.isArray(correctAnswer)) {
+        if (isEqual(correctAnswer, currentAnswer)) {
+          return acc + 1;
+        }
+      } else {
+        if (correctAnswer === currentAnswer) {
+          console.warn("Answer matched!");
+          return acc + 1;
+        }
+      }
+
+      return acc;
+    }, 0);
+
+    return Math.min(100, Math.round((100 / numberOfQuestions) * correctAnswers));
+  };
+
+  try {
+    await admin.firestore().collection("exam").doc(examId).update({ answers, submitAt: new Date(), score: getScore() });
+  } catch(error) {
+    return res.status(500).send({ error: "There was an error submitting the exam" });
+  }
+
+  return res
+    .status(200)
+    .type("application/json")
+    .send({ id: examId, answers, score: getScore() });
+});
+
+function isEqual(a, b) {
+  return a.every((value, index) => value === b[index]);
+}
+
 exports.exams = functions.https.onRequest(app);

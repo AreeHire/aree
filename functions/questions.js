@@ -55,7 +55,7 @@ module.exports = [
       },
       {
         value: "Javascript uses the Event Loop to keep running operations in a single thread while async operations get resolved",
-        correct: false,
+        correct: true,
       },
     ],
     tags: ["javascript"]
