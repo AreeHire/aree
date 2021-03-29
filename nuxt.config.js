@@ -1,6 +1,18 @@
+import axios from 'axios';
+
 export default {
   ssr: false,
   target: 'static',
+  generate: {
+    routes: () => {
+      return axios.get('exams').then(res => {
+        return [
+          ...res.data.map(exam => `/exams/${exam.id}`),
+          ...res.data.map(exam => `/apply/${exam.id}`),
+        ];
+      });
+    }
+  },
 
   head: {
     title: 'Aree Hiring',
