@@ -4,17 +4,12 @@ export default {
   ssr: false,
   target: 'static',
   generate: {
-    routes: () => {
-<<<<<<< HEAD
-      return axios.get('exams').then(res => {
-=======
-      return axios.get('/exams').then(res => {
->>>>>>> Generate dynamic routes
-        return [
-          ...res.data.map(exam => `/exams/${exam.id}`),
-          ...res.data.map(exam => `/apply/${exam.id}`),
-        ];
-      });
+    routes: async function() {
+      const exams = await axios.get('/exams')
+      return [
+        ...exams.data.map(exam => `/exams/${exam.id}`),
+        ...exams.data.map(exam => `/apply/${exam.id}`),
+      ];
     }
   },
 
