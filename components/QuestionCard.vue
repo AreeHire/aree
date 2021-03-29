@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="border border-gray-400 rounded-xl p-4"
-  >
+  <div class="border border-gray-400 rounded-xl p-4">
     <p class="text-cyan-700">{{ questionType }}</p>
-    <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }} </p>
-    <p>{{answer}}</p>
+    <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }}</p>
+    <p>{{ answer }}</p>
 
     <template v-if="question.type === 'single' || question.type === 'multiple'">
       <div :key="option.value" v-for="(option, index) in question.options">
@@ -15,14 +13,22 @@
           :id="`question-${questionNumber}-${index}`"
           :value="index"
           :name="`group-${questionNumber}`"
-        ></input>
-        <label class="cursor-pointer" :key="option.value" :for="`question-${questionNumber}-${index}`">
+        />
+        <label
+          class="cursor-pointer"
+          :key="option.value"
+          :for="`question-${questionNumber}-${index}`"
+        >
           {{ option.value }}
         </label>
       </div>
     </template>
     <template v-if="question.type === 'text'">
-      <textarea class="w-full p-1 border-2 border-black rounded" rows="3" type="text" />
+      <textarea
+        class="w-full p-1 border-2 border-black rounded"
+        rows="3"
+        type="text"
+      />
     </template>
   </div>
 </template>
@@ -39,7 +45,7 @@ export default {
       required: true
     },
     value: {
-      required: false,
+      required: false
     }
   },
   data() {
@@ -51,17 +57,17 @@ export default {
     }
   },
   computed: {
-    inputType: function () {
-      return this.question.type === "single" ? "radio" : "checkbox"
+    inputType: function() {
+      return this.question.type === "single" ? "radio" : "checkbox";
     },
-    questionType: function () {
+    questionType: function() {
       const types = {
-        single: 'Single choice',
-        multiple: 'Multiple choice',
-        text: 'Free text'
+        single: "Single choice",
+        multiple: "Multiple choice",
+        text: "Free text"
       };
 
-      return types[this.question.type]
+      return types[this.question.type];
     }
   }
 };
