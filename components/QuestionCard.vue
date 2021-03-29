@@ -2,9 +2,8 @@
   <div
     class="border border-gray-400 rounded-xl p-4"
   >
-    <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }} -
-      <span class="text-cyan-800 text-center">{{ questionType }}</span>
-    </p>
+    <p class="text-cyan-700">{{ questionType }}</p>
+    <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }} </p>
 
     <template v-if="question.type === 'single' || question.type === 'multiple'">
       <div :key="option.value" v-for="(option, index) in question.options">
