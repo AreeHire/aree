@@ -5,7 +5,7 @@ export default {
   head: {
     title: 'Aree Hiring',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },

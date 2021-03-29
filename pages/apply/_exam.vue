@@ -1,7 +1,12 @@
 <template>
-  <div class="flex justify-center">
-    <div class="flex flex-col items-center md:w-2/3 lg:w-1/2">
-      <header class="text-xl mb-4">{{ name }}</header>
+  <div class="flex justify-center h-screen">
+    <div class="flex flex-col md:w-2/3 lg:w-1/2">
+      <header
+        class="w-full text-center text-xl pb-1 mb-4 border-b border-black-500"
+      >
+        {{ name }}
+      </header>
+      <Timer :minutes="1" />
       <question-card
         v-if="currentQuestion"
         class="mb-4 w-full"
@@ -14,7 +19,7 @@
         </Button>
         <Button class="w-1/2 ml-4" @click="goToNext">
           <span v-if="index < questions.length - 1">Next</span>
-          <span v-if="index === questions.length - 1">Submit!</span>
+          <span v-if="index === questions.length - 1">Submit</span>
         </Button>
       </div>
     </div>
@@ -22,10 +27,14 @@
 </template>
 
 <script>
-import QuestionCard from "~/components/QuestionCard.vue";
+import QuestionCard from "@/components/QuestionCard.vue";
+import Timer from "@/components/Timer.vue";
 
 export default {
-  components: { QuestionCard },
+  components: {
+    QuestionCard,
+    Timer
+  },
   data() {
     return { name: "", questions: [], index: 0 };
   },

@@ -25,4 +25,5 @@ module.exports = {
       sans: ['Poppins', 'serif'],
     }
   },
+  darkMode: 'class'
 }

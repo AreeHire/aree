@@ -1,6 +1,7 @@
 <template>
   <div>
     <p class="text-xl mb-4">{{ name }} Questions (Preview Mode)</p>
+    <a :href="`/apply/${exam}`">Link to Apply</a>
     <template v-for="(question, index) in questions">
       <question-card
         class="mb-4"
@@ -28,7 +29,6 @@ export default {
   },
   async fetch() {
     const exam = await getExam(this.$axios, this.exam);
-    console.warn(exam);
 
     this.name = exam.name;
     this.questions = exam.questions;

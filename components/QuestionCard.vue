@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border border-gray-400 rounded-xl p-4 "
+    class="border border-gray-400 rounded-xl p-4"
   >
     <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }} -
       <span class="text-cyan-800 text-center">{{ questionType }}</span>
