@@ -1,7 +1,7 @@
 <template>
   <div v-if="submitted">
     <p>Thanks for applying! Your score is {{ score }}</p>
-    <p>Our internal recruiter Alberto Romero will get in touch real soon!</p>
+    <p>Our internal recruiters will get in touch real soon!</p>
   </div>
   <div v-else class="flex justify-center h-screen">
     <div class="flex flex-col md:w-2/3 lg:w-1/2">
