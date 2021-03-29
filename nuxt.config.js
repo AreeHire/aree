@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export default {
-  mode: 'spa',
   ssr: false,
   target: 'static',
 
