@@ -6,7 +6,7 @@
       >
         {{ name }}
       </header>
-      <Timer :minutes="1" />
+      <Timer class="mb-1" :minutes="1" />
       <question-card
         v-if="currentQuestion"
         class="mb-4 w-full"
