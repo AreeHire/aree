@@ -16,9 +16,6 @@
         </p>
       </div>
     </div>
-    <button class="bg-gray-400 w-28 h-12 text-center self-center rounded-md">
-      Go to Detail
-    </button>
   </div>
 </template>
 

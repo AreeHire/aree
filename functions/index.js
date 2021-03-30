@@ -6,6 +6,8 @@ const uuid4 = require("uuid").v4;
 
 const questions = require("./questions");
 
+const getCandidatesModule = require("./candidates");
+
 app.use(cors({ origin: true }));
 app.use(express.json());
 
@@ -55,9 +57,10 @@ app.post("/", async (req, res) => {
     .send({ id: examId, exam });
 });
 
-app.patch("/:examId", async (req, res) => {
+app.post("/:examId/application", async (req, res) => {
   const { examId } = req.params;
-  const { answers } = req.body;
+  const { answers, email } = req.body;
+  console.warn(email);
 
   let examRef;
   try {
@@ -106,16 +109,24 @@ app.patch("/:examId", async (req, res) => {
     return Math.min(100, Math.round((100 / numberOfQuestions) * correctAnswers));
   };
 
+  const applicationId = uuid4();
+
   try {
-    await admin.firestore().collection("exam").doc(examId).update({ answers, submitAt: new Date(), score: getScore() });
+    await admin.firestore().collection("candidates").doc(applicationId).set({
+      answers,
+      examId,
+      email,
+      submitAt: new Date(),
+      score: getScore(),
+    });
   } catch(error) {
-    return res.status(500).send({ error: "There was an error submitting the exam" });
+    return res.status(500).send({ error: error.toString() });
   }
 
   return res
     .status(200)
     .type("application/json")
-    .send({ id: examId, answers, score: getScore() });
+    .send({ id: examId, answers, email, score: getScore() });
 });
 
 function isEqual(a, b) {
@@ -123,3 +134,4 @@ function isEqual(a, b) {
 }
 
 exports.exams = functions.https.onRequest(app);
+exports.candidates = functions.https.onRequest(getCandidatesModule(admin));

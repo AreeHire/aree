@@ -6,7 +6,7 @@
       <p class="text-3xl pl-6 pr-8">Aree</p>
       <div class="flex flex-col items-center">
         <NuxtLink class="text-lg mt-4" to="/exams"> Exams </NuxtLink>
-        <NuxtLink class="text-lg mt-4" to="#"> Candidates </NuxtLink>
+        <NuxtLink class="text-lg mt-4" to="/candidates"> Candidates </NuxtLink>
       </div>
     </div>
     <div class="mb-10">

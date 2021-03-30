@@ -34,11 +34,13 @@
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
 import Timer from "@/components/Timer.vue";
 
 export default {
   components: {
+    Button,
     QuestionCard,
     Timer
   },
@@ -74,17 +76,18 @@ export default {
     },
     goToNext() {
       if (this.index === this.questions.length - 1) {
-        const confirmed = window.confirm(
-          "Are you sure you want to submit this test?"
+        const email = window.prompt(
+          "Please add your email to complete the submission"
         );
 
-        if (confirmed) this.submitExam();
+        if (email) this.submitExam(email);
       } else {
         this.index = this.index + 1;
       }
     },
-    async submitExam() {
-      const result = await this.$axios.patch(`/exams/${this.exam}`, {
+    async submitExam(email) {
+      const result = await this.$axios.post(`/exams/${this.exam}/application`, {
+        email,
         answers: this.answers
       });
 
