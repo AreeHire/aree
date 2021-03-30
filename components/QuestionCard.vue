@@ -4,7 +4,7 @@
     <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }}</p>
     <template v-if="question.type === 'single' || question.type === 'multiple'">
       <div
-        class="mb-2"
+        class="mb-2 sm:mb-0"
         :key="option.value"
         v-for="(option, index) in question.options"
       >
