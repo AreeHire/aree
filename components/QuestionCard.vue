@@ -3,7 +3,11 @@
     <p class="text-cyan-700">{{ questionType }}</p>
     <p class="font-bold mb-3">{{ questionNumber }}. {{ question.name }}</p>
     <template v-if="question.type === 'single' || question.type === 'multiple'">
-      <div :key="option.value" v-for="(option, index) in question.options">
+      <div
+        class="mb-2"
+        :key="option.value"
+        v-for="(option, index) in question.options"
+      >
         <input
           v-model="answer"
           :type="inputType"
