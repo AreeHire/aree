@@ -12,7 +12,14 @@
         <p class="font-black">{{ name }}</p>
         <p class="italic">{{ job }}</p>
         <p>
-          Score: <span class="text-green-500">{{ score }}%</span>
+          Score:
+          <span
+            :class="{
+              'text-green-500': score >= 60,
+              'text-red-500': score < 60
+            }"
+            >{{ score }}%
+          </span>
         </p>
       </div>
     </div>

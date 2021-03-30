@@ -10,7 +10,10 @@
       >
         {{ name }}
       </header>
-      <Timer class="mb-1" :minutes="15" />
+      <div class="flex justify-between items-center">
+        <Timer class="mb-1" :minutes="15" />
+        <span> {{ questions.length }} Questions </span>
+      </div>
       <question-card
         v-if="currentQuestion"
         class="mb-4 w-full"
