@@ -191,7 +191,7 @@ module.exports = [
     tags: ["javascript"]
   },
   {
-    name: "What does the Array.map operator do?",
+    name: "What does the Array.map function do?",
     type: "single",
     options: [
       {
