@@ -5,7 +5,6 @@
       'bg-gray-500': type === 'default',
       'bg-blue-500': type === 'primary'
     }"
-    :type="submit ? 'submit' : null"
     @click="$emit('click')"
   >
     <slot></slot>
@@ -19,11 +18,6 @@ export default {
       type: String,
       required: false,
       default: "primary"
-    },
-    submit: {
-      type: String,
-      required: false,
-      default: false
     }
   }
 };

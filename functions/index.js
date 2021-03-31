@@ -88,7 +88,7 @@ app.post("/:examId/application", async (req, res) => {
         correctAnswer = question.options.findIndex(option => option.correct);
       }
 
-      const currentAnswer = answers[index].value;
+      const currentAnswer = answers[index] && answers[index].value;
 
       console.warn("Correct Answer", correctAnswer);
       console.warn("Current Answer", currentAnswer);
