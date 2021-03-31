@@ -115,7 +115,7 @@ module.exports = [
         correct: true
       },
       {
-        value: "The 'this' keyword means the current context of a function, meaning all the variables inside curly braces",
+        value: "The 'this' keyword means the current scope of a function, meaning all the variables inside curly braces",
         correct: false
       },
       {
