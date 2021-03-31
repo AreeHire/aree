@@ -1,18 +1,23 @@
 <template>
-  <p
-    :class="{
-      'text-red-500': minutesCounter <= 1
-    }"
-  >
-    <img class="inline w-8 h-8" src="/clock.png" />
-    {{ minutesCounter }}:{{
-      secondsCounter < 10 ? `0${secondsCounter}` : secondsCounter
-    }}
-  </p>
+  <div class="flex flex-row items-center">
+    <Clock class="mr-1" />
+    <span
+      :class="{
+        'text-red-500': minutesCounter <= 1
+      }"
+    >
+      {{ minutesCounter }}:{{
+        secondsCounter < 10 ? `0${secondsCounter}` : secondsCounter
+      }}
+    </span>
+  </div>
 </template>
 
 <script>
+import Clock from "@/components/Clock.vue";
+
 export default {
+  components: { Clock },
   props: {
     minutes: {
       type: Number,

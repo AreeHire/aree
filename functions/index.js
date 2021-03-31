@@ -40,7 +40,8 @@ app.post("/", async (req, res) => {
   const exam = {
     name,
     language,
-    questions: questions.filter(question => question.tags.indexOf(language) > -1)
+    questions: questions.filter(question => question.tags.indexOf(language) > -1),
+    createdAt: new Date()
   };
 
   const examId = uuid4();
@@ -116,7 +117,7 @@ app.post("/:examId/application", async (req, res) => {
       answers,
       examId,
       email,
-      submitAt: new Date(),
+      createdAt: new Date(),
       score: getScore(),
     });
   } catch(error) {

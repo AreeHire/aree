@@ -1,36 +1,40 @@
 <template>
-  <div v-if="submitted">
-    <p>Thanks for applying! Your score is {{ score }}</p>
-    <p>Our internal recruiters will get in touch real soon!</p>
-  </div>
-  <div v-else class="flex justify-center h-screen">
-    <div class="flex flex-col md:w-2/3 lg:w-1/2">
-      <header
-        class="w-full text-center text-xl pb-1 mb-4 border-b border-black-500"
-      >
-        {{ name }}
-      </header>
-      <div class="flex justify-between items-center">
-        <Timer class="mb-1" :minutes="15" />
-        <span> {{ questions.length }} Questions </span>
-      </div>
-      <question-card
-        v-if="currentQuestion"
-        class="mb-4 w-full"
-        :key="index"
-        :questionNumber="index + 1"
-        :question="currentQuestion"
-        :value="currentAnswer"
-        @answered="handleAnswers"
-      />
-      <div class="flex flex-row justify-between w-full">
-        <Button type="default" class="w-1/2 mr-4" @click="goToPrevious">
-          Back
-        </Button>
-        <Button class="w-1/2 ml-4" @click="goToNext">
-          <span v-if="index < questions.length - 1">Next</span>
-          <span v-if="index === questions.length - 1">Submit</span>
-        </Button>
+  <div>
+    <header
+      class="w-full text-center text-xl pb-1 mb-4 border-b border-black-500"
+    >
+      {{ name }}
+    </header>
+    <ExamWelcome
+      :numberOfQuestions="numberOfQuestions"
+      v-if="phase === 'welcome'"
+      @click="moveToExam"
+    />
+    <ExamCompleted v-else-if="phase === 'thanks'" :score="score" />
+    <div v-else class="flex justify-center h-screen">
+      <div class="flex flex-col md:w-2/3 lg:w-1/2">
+        <div class="flex justify-between items-center mb-1">
+          <Timer :minutes="15" />
+          <span> {{ questions.length }} Questions </span>
+        </div>
+        <question-card
+          v-if="currentQuestion"
+          class="mb-4 w-full"
+          :key="index"
+          :questionNumber="index + 1"
+          :question="currentQuestion"
+          :value="currentAnswer"
+          @answered="handleAnswers"
+        />
+        <div class="flex flex-row justify-between w-full">
+          <Button type="default" class="w-1/2 mr-4" @click="goToPrevious">
+            Back
+          </Button>
+          <Button class="w-1/2 ml-4" @click="goToNext">
+            <span v-if="index < questions.length - 1">Next</span>
+            <span v-if="index === questions.length - 1">Submit</span>
+          </Button>
+        </div>
       </div>
     </div>
   </div>
@@ -38,12 +42,14 @@
 
 <script>
 import Button from "@/components/Button.vue";
+import ExamWelcome from "@/components/ExamWelcome.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
 import Timer from "@/components/Timer.vue";
 
 export default {
   components: {
     Button,
+    ExamWelcome,
     QuestionCard,
     Timer
   },
@@ -54,7 +60,7 @@ export default {
       index: 0,
       answers: {},
       score: 0,
-      submitted: false
+      phase: "welcome"
     };
   },
   computed: {
@@ -66,9 +72,15 @@ export default {
       if (answer) return answer.value;
 
       return [];
+    },
+    numberOfQuestions() {
+      return this.questions.length;
     }
   },
   methods: {
+    moveToExam() {
+      this.phase = "exam";
+    },
     handleAnswers(value) {
       this.answers[this.index] = { value };
     },
@@ -95,7 +107,7 @@ export default {
       });
 
       this.score = result.data.score;
-      this.submitted = true;
+      this.phase = "thanks";
     }
   },
   async fetch() {

@@ -52,7 +52,7 @@ export default {
           measurementId: process.env.FIREBASE_MEASUREMENT_ID
         },
         services: {
-          firestore: true
+          firestore: true,
         }
       }
     ],
@@ -70,3 +70,18 @@ export default {
     baseUrl: process.env.API_URL
   }
 }
+
+/*
+
+          auth: {
+            persistence: "local",
+            initialize: {
+              onAuthStateChangedMutation: "onAuthStateChangedMutation",
+              onAuthStateChangedAction: "onAuthStateChangedAction",
+              subscribeManually: false
+            },
+            ssr: false,
+            emulatorPort: 9099,
+            emulatorHost: "http://localhost"
+          }
+*/

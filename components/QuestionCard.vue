@@ -54,7 +54,7 @@ export default {
     return { answer: this.value };
   },
   watch: {
-    answer(newValue, oldValue) {
+    answer(newValue, _oldValue) {
       this.$emit("answered", newValue);
     }
   },
