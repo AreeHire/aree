@@ -131,7 +131,7 @@ app.post("/:examId/application", async (req, res) => {
 });
 
 function isEqual(a, b) {
-  return a.every((value, index) => value === b[index]);
+  return Array.isArray(a) && Array.isArray(b) && a.every((value, index) => value === b[index]);
 }
 
 exports.exams = functions.https.onRequest(app);

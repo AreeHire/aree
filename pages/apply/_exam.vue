@@ -1,34 +1,32 @@
 <template>
   <div>
-    <header
-      class="w-full text-center text-xl pb-1 mb-4 border-b border-black-500"
-    >
-      {{ name }}
-    </header>
+    <ExamHeader> {{ name }}</ExamHeader>
     <ExamWelcome
-      :numberOfQuestions="numberOfQuestions"
       v-if="phase === 'welcome'"
+      :numberOfQuestions="numberOfQuestions"
       @click="moveToExam"
     />
-    <ExamCompleted v-else-if="phase === 'thanks'" :score="score" />
     <Exam
-      v-else
+      v-else-if="phase === 'exam'"
       :questions="questions"
       :answers="answers"
       @answered="handleAnswer"
       @submitExam="submitExam"
     />
+    <ExamCompleted v-else :score="score" />
   </div>
 </template>
 
 <script>
 import ExamWelcome from "@/components/ExamWelcome.vue";
+import ExamHeader from "@/components/ExamHeader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
 import Timer from "@/components/Timer.vue";
 
 export default {
   layout: "dev",
   components: {
+    ExamHeader,
     ExamWelcome,
     QuestionCard,
     Timer
