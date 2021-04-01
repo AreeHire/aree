@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-center h-screen">
-    <div class="flex flex-col md:w-2/3 lg:w-1/2">
+  <div class="flex justify-center">
+    <div class="flex flex-col md:w-2/3 lg:w-1/2 xl:w-1/3">
       <div class="flex justify-between items-center mb-1">
         <Timer :minutes="15" />
         <span> {{ questions.length }} Questions </span>
