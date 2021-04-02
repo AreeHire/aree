@@ -5,6 +5,7 @@ const app = express();
 const uuid4 = require("uuid").v4;
 
 const questions = require("./questions");
+const getScore = require("./scoring");
 
 const getCandidatesModule = require("./candidates");
 
@@ -61,7 +62,6 @@ app.post("/", async (req, res) => {
 app.post("/:examId/application", async (req, res) => {
   const { examId } = req.params;
   const { answers, email } = req.body;
-  console.warn(email);
 
   let examRef;
   try {
@@ -70,55 +70,17 @@ app.post("/:examId/application", async (req, res) => {
     return res.status(404).send({ error: "Exam does not exist" });
   }
 
-  const getScore = () => {
-    const exam = examRef.data();
-    const numberOfQuestions = exam.questions.length;
-    console.log("Start analyzing test");
-
-    const correctAnswers = exam.questions.reduce((acc, question, index) => {
-      if (question.type === "text") return acc;
-
-      let correctAnswer;
-      if (question.type === "multiple") {
-        correctAnswer = question.options.reduce((acc, option, index) => {
-          if (option.correct) acc.push(index);
-          return acc;
-        }, []);
-      } else if (question.type === "single") {
-        correctAnswer = question.options.findIndex(option => option.correct);
-      }
-
-      const currentAnswer = answers[index] && answers[index].value;
-
-      console.warn("Correct Answer", correctAnswer);
-      console.warn("Current Answer", currentAnswer);
-
-      if (Array.isArray(correctAnswer)) {
-        if (isEqual(correctAnswer, currentAnswer)) {
-          return acc + 1;
-        }
-      } else {
-        if (correctAnswer === currentAnswer) {
-          console.warn("Answer matched!");
-          return acc + 1;
-        }
-      }
-
-      return acc;
-    }, 0);
-
-    return Math.min(100, Math.round((100 / numberOfQuestions) * correctAnswers));
-  };
+  functions.logger.log("Start analyzing test for ${email} doing the exam ${exam.name}");
+  const score = getScore(examRef.data(), answers);
 
   const applicationId = uuid4();
-
   try {
     await admin.firestore().collection("candidates").doc(applicationId).set({
       answers,
       examId,
       email,
+      score,
       createdAt: new Date(),
-      score: getScore(),
     });
   } catch(error) {
     return res.status(500).send({ error: error.toString() });
@@ -127,12 +89,9 @@ app.post("/:examId/application", async (req, res) => {
   return res
     .status(200)
     .type("application/json")
-    .send({ id: examId, answers, email, score: getScore() });
+    .send({ id: examId, answers, email, score });
 });
 
-function isEqual(a, b) {
-  return Array.isArray(a) && Array.isArray(b) && a.every((value, index) => value === b[index]);
-}
 
 exports.exams = functions.https.onRequest(app);
 exports.candidates = functions.https.onRequest(getCandidatesModule(admin));
