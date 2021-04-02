@@ -2,19 +2,18 @@ module.exports = {
   root: true,
   env: {
     es6: true,
-    node: true,
+    node: true
   },
-  globals: [
-    "describe",
-    "it"
-  ],
+  globals: {
+    describe: true,
+    expect: true,
+    test: true
+  },
   parserOptions: {
-    "ecmaVersion": 2018
+    ecmaVersion: 2018
   },
-  extends: [
-    "eslint:recommended",
-  ],
+  extends: ["eslint:recommended"],
   rules: {
-    quotes: ["error", "double"],
-  },
+    quotes: ["error", "double"]
+  }
 };

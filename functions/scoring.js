@@ -7,7 +7,7 @@ function getScore(exam, answers) {
 
 function evaluateQuestion(answers) {
   return function(acc, question, index) {
-    const correctAnswer = getCorrectAnswer(question);
+    const correctAnswer = getCorrectAnswer(question, acc);
     const currentAnswer = answers[index] && answers[index].value;
 
     if (
@@ -22,7 +22,7 @@ function evaluateQuestion(answers) {
   };
 }
 
-function getCorrectAnswer(question) {
+function getCorrectAnswer(question, acc) {
   if (question.type === "text") return acc;
   if (question.type === "single")
     return question.options.findIndex(option => option.correct);
