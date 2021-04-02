@@ -1,6 +1,5 @@
 function getScore(exam, answers) {
   const numberOfQuestions = exam.questions.length;
-
   const correctAnswers = exam.questions.reduce(evaluateQuestion(answers), 0);
 
   return Math.min(100, Math.round((100 / numberOfQuestions) * correctAnswers));
