@@ -4,21 +4,23 @@ function getScore(exam, answers) {
   const correctAnswers = exam.questions.reduce(evaluateQuestion(answers), 0);
 
   return Math.min(100, Math.round((100 / numberOfQuestions) * correctAnswers));
-};
+}
 
-function evaluateQuestion (answers) {
-  return function (acc, question, index) {
+function evaluateQuestion(answers) {
+  return function(acc, question, index) {
     const correctAnswer = getCorrectAnswer(question);
     const currentAnswer = answers[index] && answers[index].value;
 
-    if (isMultipleChoiceQuestion(correctAnswer)) {
-      if (isEqual(correctAnswer, currentAnswer)) return acc + 1;
-    } else {
-      if (correctAnswer === currentAnswer) return acc + 1;
+    if (
+      isMultipleChoiceQuestion(correctAnswer) &&
+      isEqual(correctAnswer, currentAnswer)
+    ) {
+      return acc + 1;
     }
+    if (correctAnswer === currentAnswer) return acc + 1;
 
     return acc;
-  }
+  };
 }
 
 function getCorrectAnswer(question) {
@@ -39,7 +41,11 @@ function isMultipleChoiceQuestion(correctAnswer) {
 }
 
 function isEqual(a, b) {
-  return Array.isArray(a) && Array.isArray(b) && a.every((value, index) => value === b[index]);
+  return (
+    Array.isArray(a) &&
+    Array.isArray(b) &&
+    a.every((value, index) => value === b[index])
+  );
 }
 
 module.exports = getScore;
