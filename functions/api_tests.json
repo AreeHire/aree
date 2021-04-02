@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "241c1364-5c24-472c-ba07-56c85a768e4f",
+		"name": "Aree Hiring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Exam",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create Exam\", function() {",
+							"    pm.response.to.have.status(200);",
+							"    pm.collectionVariables.set(\"test_exam\", pm.response.json().id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Exam\",\n    \"language\": \"javascript\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{apiUrl}}/exams",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"exams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Exam",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test get exam\", function () {",
+							"    pm.expect(pm.response.json()).to.haveOwnProperty(\"name\");",
+							"    pm.expect(pm.response.json()).to.haveOwnProperty(\"questions\");",
+							"    pm.expect(pm.response.json()).to.haveOwnProperty(\"language\");",
+							"    pm.expect(pm.response.json()).to.haveOwnProperty(\"createdAt\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/exams/{{test_exam}}",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"exams",
+						"{{test_exam}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Exams",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test get exams\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/exams",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"exams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Exam Answers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Submit Exam\", function () {",
+							"    pm.expect(pm.response.json().score).to.equals(89);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.105 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					},
+					{
+						"key": "Sec-GPC",
+						"value": "1"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"asdfasdf\",\"answers\":{\"0\":{\"value\":[0,2,3]},\"1\":{\"value\":2},\"2\":{\"value\":0},\"3\":{\"value\":[1]},\"4\":{\"value\":0},\"5\":{\"value\":[2,3,4]},\"6\":{\"value\":0},\"7\":{\"value\":0},\"8\":{\"value\":0}}}"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/exams/{{test_exam}}/application",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"exams",
+						"{{test_exam}}",
+						"application"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "test_exam",
+			"value": "5d6fda8d-52bb-4584-8558-de4e87b7496c"
+		}
+	]
+}
