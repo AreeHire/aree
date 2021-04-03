@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import Exam from "@/components/Exam.vue";
 import ExamWelcome from "@/components/ExamWelcome.vue";
 import ExamHeader from "@/components/ExamHeader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
@@ -26,6 +27,7 @@ import Timer from "@/components/Timer.vue";
 export default {
   layout: "dev",
   components: {
+    Exam,
     ExamHeader,
     ExamWelcome,
     QuestionCard,

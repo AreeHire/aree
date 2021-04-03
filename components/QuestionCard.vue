@@ -47,7 +47,10 @@ export default {
       required: true
     },
     value: {
-      required: false
+      required: false,
+      default: function() {
+        return [];
+      }
     }
   },
   data() {
