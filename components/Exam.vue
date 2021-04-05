@@ -66,7 +66,7 @@ export default {
       this.index = this.index - 1;
     },
     goToNext() {
-      if (this.index === this.questions.length - 1) {
+      if (this.isLastQuestion()) {
         const email = window.prompt(
           "Please add your email to complete the submission"
         );
@@ -77,6 +77,9 @@ export default {
       } else {
         this.index = this.index + 1;
       }
+    },
+    isLastQuestion() {
+      return this.index === this.questions.length - 1;
     },
     handleAnswered(value) {
       this.$emit("answered", this.index, value);

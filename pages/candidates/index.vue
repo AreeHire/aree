@@ -1,14 +1,18 @@
 <template>
   <div>
     <Title class="mb-4" text="Candidates" />
-    <candidate-card
-      class="w-full"
+    <a
       v-for="(candidate, index) in candidates"
       :key="index"
-      :name="candidate.email"
-      :job="candidate.exam"
-      :score="candidate.score"
-    />
+      :href="`/candidates/${candidate.id}`"
+    >
+      <candidate-card
+        class="w-full"
+        :name="candidate.email"
+        :job="candidate.exam"
+        :score="candidate.score"
+      />
+    </a>
   </div>
 </template>
 
