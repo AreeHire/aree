@@ -1,7 +1,6 @@
 <template>
   <input
-    class="border-gray-400 border-2 rounded px-1 w-1/2"
-    :type="type"
+    class="border-gray-400 border-2 rounded px-1"
     :name="name"
     :required="required"
     @change="$emit('change', $event.target.value)"
@@ -12,10 +11,6 @@
 export default {
   props: {
     name: {
-      type: String,
-      required: true
-    },
-    type: {
       type: String,
       required: true
     },

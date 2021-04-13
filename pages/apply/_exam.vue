@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div v-if="!$fetchState.pending">
     <ExamHeader> {{ name }}</ExamHeader>
     <ExamWelcome
-      v-if="phase === 'welcome'"
+      v-if="phase === 'welcome' && name"
+      :minutes="15"
       :numberOfQuestions="numberOfQuestions"
       @click="moveToExam"
     />
