@@ -31,9 +31,9 @@ function evaluateQuestion(answers) {
 
 function getCorrectAnswer(question, acc) {
   if (question.type === "text") return acc;
-  if (question.type === "single")
+  if (question.type === "single") {
     return question.options.findIndex(option => option.correct);
-
+  }
   if (question.type === "multiple") {
     return question.options.reduce((acc, option, index) => {
       if (option.correct) acc.push(index);
