@@ -10,11 +10,18 @@ function evaluateQuestion(answers) {
     const correctAnswer = getCorrectAnswer(question, acc);
     const currentAnswer = answers[index] && answers[index].value;
 
+    if (currentAnswer === undefined) return acc;
     if (
-      isMultipleChoiceQuestion(correctAnswer) &&
-      isEqual(correctAnswer, currentAnswer)
+      isMultipleChoiceQuestion(question) &&
+      isCorrect(correctAnswer, currentAnswer)
     ) {
       return acc + 1;
+    }
+    if (
+      isMultipleChoiceQuestion(question) &&
+      isPartiallyCorrect(correctAnswer, currentAnswer)
+    ) {
+      return acc + 0.3;
     }
     if (correctAnswer === currentAnswer) return acc + 1;
 
@@ -35,15 +42,21 @@ function getCorrectAnswer(question, acc) {
   }
 }
 
-function isMultipleChoiceQuestion(correctAnswer) {
-  return Array.isArray(correctAnswer);
+function isMultipleChoiceQuestion(question) {
+  return question.type === "multiple";
 }
 
-function isEqual(a, b) {
+function isCorrect(a, b) {
   return (
     Array.isArray(a) &&
     Array.isArray(b) &&
     a.every((value, index) => value === b[index])
+  );
+}
+
+function isPartiallyCorrect(correctAnswer, currentAnswer) {
+  return currentAnswer.some(
+    answeredOption => correctAnswer.indexOf(answeredOption) > -1
   );
 }
 

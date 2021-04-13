@@ -118,7 +118,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Submit Exam\", function () {",
-							"    pm.expect(pm.response.json().score).to.equals(89);",
+							"    pm.expect(pm.response.json().score).to.equals(92);",
 							"})"
 						],
 						"type": "text/javascript"

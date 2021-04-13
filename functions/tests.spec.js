@@ -1,11 +1,7 @@
 const getScore = require("./scoring");
 const questions = require("./fixtures/test_questions");
 
-const testExam = {
-  id: "id",
-  name: "Founding Engineer",
-  questions
-};
+const testExam = { questions };
 
 const answers = {
   "0": { value: [0, 2, 3] },
@@ -30,10 +26,33 @@ describe("Get Score", () => {
     expect(score).toEqual(11);
   });
 
-  test.skip("score partially with incomplete answers", () => {
-    const testAnswers = Object.assign({}, answers);
-    testAnswers[3] = { value: [0, 1, 3] };
-    const score = getScore(testExam, testAnswers);
-    expect(score).toEqual(100);
+  test("Get 30% of score when partially correct in multiple option questions", () => {
+    const exam = {
+      questions: [
+        {
+          name: "What is love?",
+          type: "multiple",
+          options: [
+            {
+              value: "Baby don't hurt me",
+              correct: true
+            },
+            {
+              value: "Don't hurt me",
+              correct: true
+            },
+            {
+              value: "No more",
+              correct: false
+            }
+          ]
+        }
+      ]
+    };
+    const testAnswers = {
+      "0": { value: [0] }
+    };
+    const score = getScore(exam, testAnswers);
+    expect(score).toEqual(30);
   });
 });
