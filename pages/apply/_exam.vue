@@ -4,7 +4,7 @@
     <ExamWelcome
       v-if="phase === 'welcome' && name"
       :minutes="15"
-      :numberOfQuestions="numberOfQuestions"
+      :numberOfQuestions="questions.length"
       @click="moveToExam"
     />
     <Exam
@@ -19,7 +19,10 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
 import Exam from "@/components/Exam.vue";
+import ExamCompleted from "@/components/ExamCompleted.vue";
 import ExamWelcome from "@/components/ExamWelcome.vue";
 import ExamHeader from "@/components/ExamHeader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
@@ -29,31 +32,33 @@ export default {
   layout: "dev",
   components: {
     Exam,
+    ExamCompleted,
     ExamHeader,
     ExamWelcome,
     QuestionCard,
     Timer
   },
-  data() {
-    return {
-      name: "",
-      questions: [],
-      answers: {},
-      score: 0,
-      phase: "welcome"
-    };
-  },
   computed: {
-    numberOfQuestions() {
-      return this.questions.length;
-    }
+    ...mapState({
+      name: state => state.examApplication.name,
+      questions: state => state.examApplication.questions,
+      answers: state => state.examApplication.answers,
+      score: state => state.examApplication.score,
+      phase: state => state.examApplication.phase
+    })
   },
   methods: {
+    ...mapMutations({
+      setExam: "examApplication/setExam",
+      setAnswer: "examApplication/setAnswer",
+      setScore: "examApplication/setScore",
+      setPhase: "examApplication/setPhase"
+    }),
     moveToExam() {
-      this.phase = "exam";
+      this.setPhase("exam");
     },
     handleAnswer(index, value) {
-      this.answers[index] = { value };
+      this.setAnswer({ index, value });
     },
     async submitExam(email) {
       const result = await this.$axios.post(`/exams/${this.exam}/application`, {
@@ -61,15 +66,14 @@ export default {
         answers: this.answers
       });
 
-      this.score = result.data.score;
-      this.phase = "thanks";
+      this.setScore(result.data.score);
+      this.setPhase("thanks");
     }
   },
   async fetch() {
     const exam = await getExam(this.$axios, this.exam);
 
-    this.name = exam.name;
-    this.questions = exam.questions;
+    this.setExam(exam);
   },
   asyncData({ params }) {
     return { exam: params.exam };
