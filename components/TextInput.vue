@@ -4,7 +4,7 @@
     :name="name"
     :required="required"
     :autofocus="autofocus"
-    @change="$emit('input', $event.target.value)"
+    @input="$emit('input', $event.target.value)"
   />
 </template>
 

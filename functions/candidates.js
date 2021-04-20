@@ -11,7 +11,7 @@ const getModule = admin => {
     const candidatesRef = await admin
       .firestore()
       .collection("candidates")
-      .orderBy("score", "desc")
+      .orderBy("createdAt", "desc")
       .get();
 
     const candidates = [];

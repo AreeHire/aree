@@ -29,7 +29,9 @@
             <Button class="w-1/2 mr-10" type="default" @click="closeModal"
               >Cancel</Button
             >
-            <Button class="w-1/2" @click="submitExam">Create</Button>
+            <Button class="w-1/2" :disabled="disabled" @click="submitExam"
+              >Create</Button
+            >
           </div>
         </div>
       </section>
@@ -42,13 +44,16 @@ import { mapMutations, mapState } from "vuex";
 
 export default {
   data: function() {
-    return { name: "", email: "" };
+    return { name: "", email: "", errors: { email: true } };
   },
   computed: {
     ...mapState({
       examId: state => state.examApplication.examId,
       answers: state => state.examApplication.answers
-    })
+    }),
+    disabled: function() {
+      return name === "" || this.errors.email;
+    }
   },
   methods: {
     ...mapMutations({
@@ -71,6 +76,19 @@ export default {
       this.setScore(result.data.score);
       this.setPhase("thanks");
       this.closeModal();
+    },
+    isValidEmail: function(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+  },
+  watch: {
+    email: function(email) {
+      if (this.isValidEmail(email)) {
+        this.errors["email"] = false;
+      } else {
+        this.errors["email"] = true;
+      }
     }
   },
   mounted: function() {
