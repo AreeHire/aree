@@ -13,15 +13,6 @@
       </p>
       <p class="mb-4">Good luck!</p>
       <div class="flex justify-center">
-        <!-- <div class="flex flex-col justify-center">
-          <div class="mb-1 flex justify-between">
-            <label class="mr-4"> Name </label>
-            <TextInput name="name" />
-          </div>
-          <div class="mb-1 flex justify-between">
-            <label> Email </label>
-            <TextInput type="email" name="email" />
-          </div> -->
         <Button class="w-1/4 self-center" @click="$emit('click')">
           Start
         </Button>

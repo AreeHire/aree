@@ -1,4 +1,5 @@
 export const state = () => ({
+  examId: "",
   name: "",
   questions: [],
   answers: {},
@@ -8,6 +9,7 @@ export const state = () => ({
 
 export const mutations = {
   setExam(state, exam) {
+    state.examId = exam.id;
     state.name = exam.name;
     state.questions = exam.questions;
   },

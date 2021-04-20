@@ -12,7 +12,6 @@
       :questions="questions"
       :answers="answers"
       @answered="handleAnswer"
-      @submitExam="submitExam"
     />
     <ExamCompleted v-else :score="score" />
   </div>
@@ -73,7 +72,7 @@ export default {
   async fetch() {
     const exam = await getExam(this.$axios, this.exam);
 
-    this.setExam(exam);
+    this.setExam(Object.assign({}, exam, { id: this.exam }));
   },
   asyncData({ params }) {
     return { exam: params.exam };

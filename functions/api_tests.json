@@ -175,7 +175,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"email\":\"asdfasdf\",\"answers\":{\"0\":{\"value\":[0,2,3]},\"1\":{\"value\":2},\"2\":{\"value\":0},\"3\":{\"value\":[1]},\"4\":{\"value\":0},\"5\":{\"value\":[2,3,4]},\"6\":{\"value\":0},\"7\":{\"value\":0},\"8\":{\"value\":0}}}"
+					"raw": "{\n    \"name\": \"Alberto Romero\",\n    \"email\": \"aromeronavia@gmail.com\",\n    \"answers\": {\n        \"0\": {\n            \"value\": [\n                0,\n                2,\n                3\n            ]\n        },\n        \"1\": {\n            \"value\": 2\n        },\n        \"2\": {\n            \"value\": 0\n        },\n        \"3\": {\n            \"value\": [\n                1\n            ]\n        },\n        \"4\": {\n            \"value\": 0\n        },\n        \"5\": {\n            \"value\": [\n                2,\n                3,\n                4\n            ]\n        },\n        \"6\": {\n            \"value\": 0\n        },\n        \"7\": {\n            \"value\": 0\n        },\n        \"8\": {\n            \"value\": 0\n        }\n    }\n}"
 				},
 				"url": {
 					"raw": "{{apiUrl}}/exams/{{test_exam}}/application",
@@ -195,7 +195,7 @@
 	"variable": [
 		{
 			"key": "test_exam",
-			"value": "5d6fda8d-52bb-4584-8558-de4e87b7496c"
+			"value": "43de5cfe-be2a-4923-8c3c-f47c6243c29a"
 		}
 	]
 }

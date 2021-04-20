@@ -76,7 +76,7 @@ app.post("/", async (req, res) => {
 
 app.post("/:examId/application", async (req, res) => {
   const { examId } = req.params;
-  const { answers, email } = req.body;
+  const { name, answers, email } = req.body;
 
   let examRef;
   try {
@@ -100,7 +100,7 @@ app.post("/:examId/application", async (req, res) => {
       .firestore()
       .collection("candidates")
       .doc(applicationId)
-      .set({ answers, examId, email, score, createdAt: new Date() });
+      .set({ name, answers, examId, email, score, createdAt: new Date() });
   } catch (error) {
     return res.status(500).send({ error: error.toString() });
   }

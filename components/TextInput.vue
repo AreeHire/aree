@@ -3,7 +3,8 @@
     class="border-gray-400 border-2 rounded px-1"
     :name="name"
     :required="required"
-    @change="$emit('change', $event.target.value)"
+    :autofocus="autofocus"
+    @change="$emit('input', $event.target.value)"
   />
 </template>
 
@@ -18,7 +19,8 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    }
+    },
+    autofocus: {}
   }
 };
 </script>

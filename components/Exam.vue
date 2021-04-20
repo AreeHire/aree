@@ -67,13 +67,7 @@ export default {
     },
     goToNext() {
       if (this.isLastQuestion()) {
-        const email = window.prompt(
-          "Please add your email to complete the submission"
-        );
-
-        if (email) {
-          this.$emit("submitExam", email);
-        }
+        this.$store.commit("modals/showModal");
       } else {
         this.index = this.index + 1;
       }
