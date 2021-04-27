@@ -52,7 +52,7 @@ export default {
       answers: state => state.examApplication.answers
     }),
     disabled: function() {
-      return name === "" || this.errors.email;
+      return this.name === "" || this.errors.email;
     }
   },
   methods: {
