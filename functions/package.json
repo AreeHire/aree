@@ -8,16 +8,18 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test:unit": "jest",
-    "test:watch": "jest --watch",
-    "test:api": "newman run api_tests.json -e dev_environment.json",
-    "test": "npm run test:unit && npm run test:api"
+    "test:unit": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "test:api": "NODE_ENV=test newman run api_tests.json -e dev_environment.json --env-var=\"NODE_ENV=test\"",
+    "test": "DOTENV_CONFIG_PATH=.env.test node -r dotenv/config npx newman run api_tests.json -e dev_environment.json"
   },
   "engines": {
     "node": "12"
   },
   "main": "index.js",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.2",
+    "dotenv": "^8.2.0",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
     "jest": "^26.6.3"

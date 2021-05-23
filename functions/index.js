@@ -1,11 +1,14 @@
+require("dotenv").config();
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const uuid4 = require("uuid").v4;
 
-const questions = require("./questions");
 const getScore = require("./scoring");
+const getMailer = require("./mailing");
+
+const questions = require("./questions");
 
 const getCandidatesModule = require("./candidates");
 
@@ -77,6 +80,7 @@ app.post("/", async (req, res) => {
 app.post("/:examId/application", async (req, res) => {
   const { examId } = req.params;
   const { name, answers, email } = req.body;
+  const mailer = getMailer();
 
   let examRef;
   try {
@@ -101,6 +105,13 @@ app.post("/:examId/application", async (req, res) => {
       .collection("candidates")
       .doc(applicationId)
       .set({ name, answers, examId, email, score, createdAt: new Date() });
+
+    await mailer.send({
+      to: email,
+      position: examRef.data().name,
+      username: name,
+      score
+    });
   } catch (error) {
     return res.status(500).send({ error: error.toString() });
   }

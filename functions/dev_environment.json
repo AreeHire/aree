@@ -4,9 +4,14 @@
 	"values": [
 		{
 			"key": "apiUrl",
-			"value": "http://localhost:5001/hire-latam/us-central1",
+			"value": "http://localhost:5002/testing/us-central1",
 			"enabled": true
-		}
+		},
+    {
+			"key": "NODE_ENV",
+			"value": "test",
+			"enabled": true
+    }
 	],
 	"_postman_variable_scope": "environment",
 	"_postman_exported_at": "2021-04-02T05:45:37.855Z",
