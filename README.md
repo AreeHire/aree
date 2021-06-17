@@ -18,3 +18,10 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+### Useful commands
+```
+$ npm test
+$ firebase emulators:start --only functions,firestore
+$ firebase emulators:start --only functions,firestore -c firebase.test.json
+```

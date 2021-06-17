@@ -1,3 +1,4 @@
+const functions = require("firebase-functions");
 const sgMail = require("@sendgrid/mail");
 
 class Mailer {
@@ -25,24 +26,13 @@ class Mailer {
   }
 }
 
-// const mailer = new Mailer();
-// mailer.send({
-//   to: "aromeronavia@gmail.com",
-//   position: "Software Engineer",
-//   username: "Alberto Romero",
-//   score: 95,
-//   email: "aromeronavia@gmail.com"
-// });
-
 module.exports = () => {
   const consoleClient = { send: console.log };
 
-  console.log(process.env);
-  console.log(process.env.NODE_ENV);
   if (process.env.NODE_ENV === "test") {
     return new Mailer(consoleClient);
   }
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  sgMail.setApiKey(functions.config().sendgrid.key);
   return new Mailer(sgMail);
 };

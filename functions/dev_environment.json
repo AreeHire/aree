@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "apiUrl",
-			"value": "http://localhost:5002/testing/us-central1",
+			"value": "http://localhost:5002/hire-latam/us-central1",
 			"enabled": true
 		},
     {
