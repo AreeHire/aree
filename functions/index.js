@@ -46,11 +46,12 @@ app.get("/:examId", async (req, res) => {
 
 app.post("/", async (req, res) => {
   const body = req.body;
-  const { name, language } = body;
+  const { name, language, email } = body;
 
   const exam = {
     name,
     language,
+    email,
     questions: questions.filter(
       question => question.tags.indexOf(language) > -1
     ),
@@ -107,7 +108,7 @@ app.post("/:examId/application", async (req, res) => {
       .set({ name, answers, examId, email, score, createdAt: new Date() });
 
     await mailer.send({
-      to: email,
+      to: [email, examRef.data().email].join(","),
       position: examRef.data().name,
       username: name,
       score

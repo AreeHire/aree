@@ -29,7 +29,10 @@ class Mailer {
 module.exports = () => {
   const consoleClient = { send: console.log };
 
-  if (process.env.NODE_ENV === "test") {
+  if (
+    process.env.NODE_ENV === "test" ||
+    process.env.NODE_ENV === "development"
+  ) {
     return new Mailer(consoleClient);
   }
 

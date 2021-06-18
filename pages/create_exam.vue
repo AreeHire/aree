@@ -9,6 +9,15 @@
         type="text"
         @change="exam = $event.target.value"
       />
+    </div>
+    <div class="inline-block w-1/2">
+      <label class="mr-1" for="examEmail"> Email </label>
+      <input
+        class="border-gray-400 border-2 rounded px-1 w-1/2"
+        name="examEmail"
+        type="text"
+        @change="email = $event.target.value"
+      />
       <p class="mt-2 mb-2">Choose a Template</p>
       <div class="flex flex-row">
         <skill-card
@@ -37,7 +46,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Title from "@/components/Title.vue";
 import SkillCard from "@/components/SkillCard.vue";
 
@@ -46,7 +54,8 @@ export default {
   data: function() {
     return {
       exam: "",
-      selected: "javascript"
+      selected: "javascript",
+      email: ""
     };
   },
   methods: {
@@ -57,7 +66,8 @@ export default {
       try {
         const response = await this.$axios.post("/exams", {
           name: this.exam,
-          language: this.selected
+          language: this.selected,
+          email: this.email
         });
 
         const { id: examId } = response.data;

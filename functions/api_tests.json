@@ -26,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Test Exam\",\n    \"language\": \"javascript\"\n}",
+					"raw": "{\n    \"name\": \"Test Exam\",\n    \"language\": \"javascript\",\n    \"email\": \"aromeronavia@gmail.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
