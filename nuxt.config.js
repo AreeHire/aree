@@ -1,46 +1,46 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   ssr: false,
-  target: 'static',
+  target: "static",
   generate: {
-    fallback: '404.html',
+    fallback: "404.html"
   },
 
   head: {
-    title: 'Aree Hiring',
+    title: "Aree Hiring",
     htmlAttrs: {
-      lang: 'en',
+      lang: "en"
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Evaluate real skills, not resumes' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: "Evaluate real skills, not resumes"
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     link: [{ rel: "preconnect", href: "https://fonts.gstatic.com" }],
     link: [
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Poppins&display=swap",
-      },
-    ],
+        href: "https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      }
+    ]
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@nuxtjs/tailwindcss',
-  ],
+  buildModules: ["@nuxtjs/tailwindcss"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     [
-      '@nuxtjs/firebase',
+      "@nuxtjs/firebase",
       {
         config: {
           apiKey: process.env.FIREBASE_API_KEY,
@@ -52,24 +52,26 @@ export default {
           measurementId: process.env.FIREBASE_MEASUREMENT_ID
         },
         services: {
-          firestore: true,
+          firestore: true
         }
       }
     ],
-    '@nuxtjs/axios',
+    "@nuxtjs/axios"
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-
-  },
+  build: {},
 
   loading: true,
 
   axios: {
     baseUrl: process.env.API_URL
+  },
+  env: {
+    authUsername: process.env.AUTH_USERNAME,
+    authPassword: process.env.AUTH_PASSWORD
   }
-}
+};
 
 /*
 
