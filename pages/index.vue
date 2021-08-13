@@ -1,10 +1,10 @@
 <template>
   <form class="block" @submit.prevent="validateLogin">
-    <label for="username">Username</label>
+    <label for="email">Email</label>
     <input
-      id="username"
+      id="email"
       class="block border border-black rounded p-1 mb-1"
-      v-model="username"
+      v-model="email"
       required
       type="text"
     />
@@ -26,20 +26,21 @@
 export default {
   data() {
     return {
-      username: "",
+      email: "",
       password: ""
     };
   },
   layout: "dev",
   methods: {
-    validateLogin() {
-      if (
-        (this.username === process.env.authUsername) &
-        (this.password === process.env.authPassword)
-      ) {
-        window.location.href = "/exams";
-      } else {
-        alert("Invalid password");
+    async validateLogin() {
+      try {
+        console.warn(this.email, this.password);
+        await this.$fire.auth.signInWithEmailAndPassword(
+          this.email,
+          this.password
+        );
+      } catch (error) {
+        console.error(error);
       }
     }
   }

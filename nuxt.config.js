@@ -35,29 +35,40 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/tailwindcss"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/firebase",
+    "@nuxtjs/axios",
+    "@nuxtjs/auth-next"
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    [
-      "@nuxtjs/firebase",
-      {
-        config: {
-          apiKey: process.env.FIREBASE_API_KEY,
-          authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-          projectId: process.env.FIREBASE_PROJECT_ID,
-          storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-          messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-          appId: process.env.FIREBASE_APP_ID,
-          measurementId: process.env.FIREBASE_MEASUREMENT_ID
+  firebase: {
+    config: {
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.FIREBASE_APP_ID,
+      measurementId: process.env.FIREBASE_MEASUREMENT_ID
+    },
+    services: {
+      firestore: true,
+      auth: {
+        persistence: 'local',
+        initialize: {
+          onAuthStateChangedMutation:
+            "ON_AUTH_STATE_CHANGED_MUTATION",
+          onAuthStateChangedAction: "onAuthStateChangedAction",
+          subscribeManually: false
         },
-        services: {
-          firestore: true
-        }
+        ssr: false, // default
+        emulatorPort: 9099,
+        emulatorHost: 'http://localhost',
       }
-    ],
-    "@nuxtjs/axios"
-  ],
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
