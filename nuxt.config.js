@@ -57,8 +57,8 @@ export default {
           subscribeManually: false,
         },
         ssr: false, // default
-        emulatorPort: 9099,
-        emulatorHost: "http://localhost",
+        emulatorPort: process.env.NODE_ENV === "production" ? null: 9099,
+        emulatorHost: process.env.NODE_ENV === "production" ? null : "http://localhost",
       },
     },
   },
@@ -76,18 +76,3 @@ export default {
     authPassword: process.env.AUTH_PASSWORD,
   },
 };
-
-/*
-
-          auth: {
-            persistence: "local",
-            initialize: {
-              onAuthStateChangedMutation: "onAuthStateChangedMutation",
-              onAuthStateChangedAction: "onAuthStateChangedAction",
-              subscribeManually: false
-            },
-            ssr: false,
-            emulatorPort: 9099,
-            emulatorHost: "http://localhost"
-          }
-*/
