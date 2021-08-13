@@ -27,6 +27,7 @@ import Title from "@/components/Title.vue";
 import ExamCard from "@/components/ExamCard.vue";
 
 export default {
+  middleware: "authenticated",
   components: { Title, ExamCard },
   data() {
     return {
@@ -35,7 +36,7 @@ export default {
   },
   async fetch() {
     this.exams = await getExams(this.$axios);
-  }
+  },
 };
 
 async function getExams(axios) {

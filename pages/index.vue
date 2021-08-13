@@ -1,28 +1,11 @@
 <template>
-  <form class="block" @submit.prevent="validateLogin">
-    <label for="email">Email</label>
-    <input
-      id="email"
-      class="block border border-black rounded p-1 mb-1"
-      v-model="email"
-      required
-      type="text"
-    />
-    <label for="password">Password</label>
-    <input
-      id="password"
-      class="block border border-black rounded p-1 mb-3"
-      v-model="password"
-      required
-      type="password"
-    />
-    <button class="block p-1 border border-black rounded">
-      Login
-    </button>
-  </form>
+  <SignIn />
 </template>
 
 <script>
+import SignIn from "../components/SignIn.vue";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -30,18 +13,13 @@ export default {
       password: ""
     };
   },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
+  },
   layout: "dev",
-  methods: {
-    async validateLogin() {
-      try {
-        console.warn(this.email, this.password);
-        await this.$fire.auth.signInWithEmailAndPassword(
-          this.email,
-          this.password
-        );
-      } catch (error) {
-        console.error(error);
-      }
+  mounted: function () {
+    if (this.isLoggedIn) {
+      this.$router.replace("/exams")
     }
   }
 };

@@ -1,11 +1,9 @@
 export const state = () => ({
-  user: false
+  user: false,
 });
 
 export const mutations = {
   ON_AUTH_STATE_CHANGED_MUTATION: (state, context) => {
-    console.warn(context);
-
     if (context.authUser) {
       const { uid, email, emailVerified } = context.authUser;
       state.user = { uid, email, emailVerified };
@@ -13,15 +11,25 @@ export const mutations = {
       context.claims = false;
       state.user = false;
     }
-  }
+  },
 };
 
-export const actions = {
-  onAuthStateChangedAction: (ctx, { authUser, claims }) => {
-    if (!authUser) {
-      console.warn("not loggedi nt");
-    } else {
-      console.warn("logged in", authUser);
+// export const actions = {
+//   onAuthStateChangedAction: (ctx, { authUser, claims }) => {
+//     if (!authUser) {
+//       console.warn("not logged in");
+//     } else {
+//       console.warn("logged in", authUser);
+//     }
+//   },
+// };
+
+export const getters = {
+  isLoggedIn: (state) => {
+    try {
+      return state.user && state.user.uid !== null;
+    } catch {
+      return false;
     }
-  }
+  },
 };
