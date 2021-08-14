@@ -110,7 +110,7 @@ app.post("/:examId/application", async (req, res) => {
       .set({ name, answers, examId, email, score, createdAt: new Date() });
 
     await mailer.send({
-      to: [email, examRef.data().email].join(","),
+      to: [email, examRef.data().email],
       position: examRef.data().name,
       username: name,
       score
