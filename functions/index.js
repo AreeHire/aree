@@ -113,6 +113,7 @@ app.post("/:examId/application", async (req, res) => {
       to: [email, examRef.data().email],
       position: examRef.data().name,
       username: name,
+      email,
       score
     });
   } catch (error) {
