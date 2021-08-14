@@ -26,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Test Exam\",\n    \"language\": \"javascript\",\n    \"email\": \"aromeronavia@gmail.com\"\n}",
+					"raw": "{\n    \"name\": \"Test Exam\",\n    \"language\": \"javascript\",\n    \"email\": \"aromeronavia@gmail.com\",\n    \"userId\": \"user-id\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -99,12 +99,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{apiUrl}}/exams",
+					"raw": "{{apiUrl}}/exams?userId=user-id",
 					"host": [
 						"{{apiUrl}}"
 					],
 					"path": [
 						"exams"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "user-id"
+						}
 					]
 				}
 			},
