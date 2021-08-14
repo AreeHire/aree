@@ -10,9 +10,26 @@
       </div>
     </div>
     <div class="mb-10">
-      <p class="px-6 text-lg">
-        Ari Romero
+      <p class="px-6 text-lg text-center">
+        {{ currentUserName }}
       </p>
+      <button class="text-center px-8 w-full pt-4 text-blue-300" @click="logout">> Sign out</button>
     </div>
   </nav>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["currentUserName"])
+  },
+  methods: {
+    logout () {
+      this.$store.commit("LOGOUT");
+      this.$router.replace("/");
+    }
+  }
+}
+</script>
