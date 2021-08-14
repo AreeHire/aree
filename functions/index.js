@@ -22,6 +22,7 @@ app.get("/", async (req, res) => {
   const examsSnapshot = await admin
     .firestore()
     .collection("exam")
+    .where("userId", "==", req.query.userId)
     .get();
 
   const exams = [];
@@ -46,10 +47,11 @@ app.get("/:examId", async (req, res) => {
 
 app.post("/", async (req, res) => {
   const body = req.body;
-  const { name, language, email } = body;
+  const { name, userId, language, email } = body;
 
   const exam = {
     name,
+    userId,
     language,
     email,
     questions: questions.filter(

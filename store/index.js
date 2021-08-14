@@ -26,10 +26,9 @@ export const mutations = {
 
 export const getters = {
   isLoggedIn: (state) => {
-    try {
-      return state.user && state.user.uid !== null;
-    } catch {
-      return false;
-    }
+    return state.user && state.user.uid !== null;
   },
+  currentUserId: (state) => {
+    return state.user && state.user.uid;
+  }
 };

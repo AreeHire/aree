@@ -66,6 +66,7 @@ export default {
       try {
         const response = await this.$axios.post("/exams", {
           name: this.exam,
+          userId: this.$store.getters.currentUserId,
           language: this.selected,
           email: this.email
         });

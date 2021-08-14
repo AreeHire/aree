@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import Title from "@/components/Title.vue";
 import ExamCard from "@/components/ExamCard.vue";
 
@@ -34,13 +36,19 @@ export default {
       exams: []
     };
   },
-  async fetch() {
-    this.exams = await getExams(this.$axios);
+  computed: {
+    ...mapGetters(["currentUserId"])
   },
+  async fetch() {
+    this.exams = await this.getExams(this.$axios);
+  },
+  methods: {
+    async getExams(axios) {
+      const response = await this.$axios.get("/exams", { params: { userId: this.currentUserId } });
+      return response.data;
+    }
+  }
+
 };
 
-async function getExams(axios) {
-  const response = await axios.get("/exams");
-  return response.data;
-}
 </script>
