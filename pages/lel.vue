@@ -1,0 +1,11 @@
+<template>
+  <div>
+    <question-builder
+      question-number="1"
+    />
+    <question-builder
+      class="mt-2"
+      question-number="2"
+    />
+  </div>
+</template>
