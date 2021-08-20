@@ -28,6 +28,52 @@ app.get("/:examId", async (req, res) => {
   return res.status(200).send(exam.data());
 });
 
+app.post("/:examId/application", async (req, res) => {
+  const { examId } = req.params;
+  const { name, answers, email } = req.body;
+  const mailer = getMailer();
+
+  let examRef;
+  try {
+    examRef = await admin
+      .firestore()
+      .collection("exam")
+      .doc(examId)
+      .get();
+  } catch (error) {
+    return res.status(404).send({ error: "Exam does not exist" });
+  }
+
+  functions.logger.log(
+    "Start analyzing test for ${email} doing the exam ${exam.name}"
+  );
+  const score = getScore(examRef.data(), answers);
+
+  const applicationId = uuid4();
+  try {
+    await admin
+      .firestore()
+      .collection("candidates")
+      .doc(applicationId)
+      .set({ name, answers, examId, email, score, createdAt: new Date() });
+
+    await mailer.send({
+      to: [email, examRef.data().email],
+      position: examRef.data().name,
+      username: name,
+      email,
+      score
+    });
+  } catch (error) {
+    return res.status(500).send({ error: error.toString() });
+  }
+
+  return res
+    .status(200)
+    .type("application/json")
+    .send({ id: examId, answers, email, score });
+});
+
 app.use(authenticationMiddleware(admin));
 
 app.get("/", async (req, res) => {
@@ -80,52 +126,6 @@ app.post("/", async (req, res) => {
     .status(200)
     .type("application/json")
     .send({ id: examId, exam });
-});
-
-app.post("/:examId/application", async (req, res) => {
-  const { examId } = req.params;
-  const { name, answers, email } = req.body;
-  const mailer = getMailer();
-
-  let examRef;
-  try {
-    examRef = await admin
-      .firestore()
-      .collection("exam")
-      .doc(examId)
-      .get();
-  } catch (error) {
-    return res.status(404).send({ error: "Exam does not exist" });
-  }
-
-  functions.logger.log(
-    "Start analyzing test for ${email} doing the exam ${exam.name}"
-  );
-  const score = getScore(examRef.data(), answers);
-
-  const applicationId = uuid4();
-  try {
-    await admin
-      .firestore()
-      .collection("candidates")
-      .doc(applicationId)
-      .set({ name, answers, examId, email, score, createdAt: new Date() });
-
-    await mailer.send({
-      to: [email, examRef.data().email],
-      position: examRef.data().name,
-      username: name,
-      email,
-      score
-    });
-  } catch (error) {
-    return res.status(500).send({ error: error.toString() });
-  }
-
-  return res
-    .status(200)
-    .type("application/json")
-    .send({ id: examId, answers, email, score });
 });
 
 exports.exams = functions.https.onRequest(app);

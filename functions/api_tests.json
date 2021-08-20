@@ -6,6 +6,62 @@
 	},
 	"item": [
 		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"idToken\", pm.response.json().idToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"{{$randomPassword}}\",\n    \"returnSecureToken\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={{web_api_key}}",
+					"protocol": "https",
+					"host": [
+						"identitytoolkit",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"accounts:signUp"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{web_api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create Exam",
 			"event": [
 				{
@@ -22,6 +78,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{idToken}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -96,6 +162,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{idToken}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
