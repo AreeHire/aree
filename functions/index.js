@@ -16,6 +16,18 @@ admin.initializeApp();
 
 app.use(cors({ origin: true }));
 app.use(express.json());
+
+app.get("/:examId", async (req, res) => {
+  const { examId } = req.params;
+
+  const exam = await admin
+    .firestore()
+    .collection("exam")
+    .doc(examId)
+    .get();
+  return res.status(200).send(exam.data());
+});
+
 app.use(authenticationMiddleware(admin));
 
 app.get("/", async (req, res) => {
@@ -32,17 +44,6 @@ app.get("/", async (req, res) => {
   });
 
   return res.status(200).send(exams);
-});
-
-app.get("/:examId", async (req, res) => {
-  const { examId } = req.params;
-
-  const exam = await admin
-    .firestore()
-    .collection("exam")
-    .doc(examId)
-    .get();
-  return res.status(200).send(exam.data());
 });
 
 app.post("/", async (req, res) => {
