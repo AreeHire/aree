@@ -54,6 +54,7 @@ export default {
         persistence: "local",
         initialize: {
           onAuthStateChangedMutation: "ON_AUTH_STATE_CHANGED_MUTATION",
+        onAuthStateChangedAction: 'onAuthStateChangedAction',
           subscribeManually: false,
         },
         ssr: false, // default
@@ -72,7 +73,12 @@ export default {
     baseUrl: process.env.API_URL,
   },
   env: {
+    apiUrl: process.env.API_URL,
     authUsername: process.env.AUTH_USERNAME,
     authPassword: process.env.AUTH_PASSWORD,
   },
+
+  plugins: [
+    '~/plugins/api'
+  ],
 };

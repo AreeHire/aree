@@ -30,7 +30,7 @@ export default {
     };
   },
   async fetch() {
-    const exam = await getExam(this.$axios, this.exam);
+    const exam = await getExam(this.$api, this.exam);
 
     this.name = exam.name;
     this.questions = exam.questions;
@@ -40,8 +40,8 @@ export default {
   }
 };
 
-async function getExam(axios, examId) {
-  const response = await axios.get(`/exams/${examId}`);
+async function getExam(api, examId) {
+  const response = await api.get(`/exams/${examId}`);
   return response.data;
 }
 </script>

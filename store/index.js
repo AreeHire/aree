@@ -1,3 +1,5 @@
+import { auth } from "firebase/auth";
+
 export const state = () => ({
   user: false,
 });
@@ -14,15 +16,16 @@ export const mutations = {
   },
   LOGOUT: (state, context) => {
     state.user = false;
-  }
+  },
 };
 
 export const actions = {
-  onAuthStateChangedAction: (ctx, { authUser, claims }) => {
+  onAuthStateChangedAction: async (ctx, { authUser, claims }) => {
     if (!authUser) {
       console.warn("not logged in");
     } else {
-      console.warn("logged in", authUser);
+      const token = await authUser.getIdToken();
+      window.localStorage.setItem("idToken", token);
     }
   },
 };

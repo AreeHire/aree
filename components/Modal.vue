@@ -64,7 +64,7 @@ export default {
       return this.$store.commit("modals/hideModal");
     },
     submitExam: async function() {
-      const result = await this.$axios.post(
+      const result = await this.api.post(
         `/exams/${this.examId}/application`,
         {
           name: this.name,

@@ -60,7 +60,7 @@ export default {
       this.setAnswer({ index, value });
     },
     async submitExam(email) {
-      const result = await this.$axios.post(`/exams/${this.exam}/application`, {
+      const result = await this.$api.post(`/exams/${this.exam}/application`, {
         email,
         answers: this.answers
       });
@@ -70,7 +70,7 @@ export default {
     }
   },
   async fetch() {
-    const exam = await getExam(this.$axios, this.exam);
+    const exam = await getExam(this.$api, this.exam);
 
     this.setExam(Object.assign({}, exam, { id: this.exam }));
   },
@@ -79,8 +79,8 @@ export default {
   }
 };
 
-async function getExam(axios, examId) {
-  const response = await axios.get(`/exams/${examId}`);
+async function getExam(api, examId) {
+  const response = await api.get(`/exams/${examId}`);
   return response.data;
 }
 </script>

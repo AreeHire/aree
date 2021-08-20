@@ -40,11 +40,11 @@ export default {
     ...mapGetters(["currentUserId"])
   },
   async fetch() {
-    this.exams = await this.getExams(this.$axios);
+    this.exams = await this.getExams(this.$api);
   },
   methods: {
-    async getExams(axios) {
-      const response = await this.$axios.get("/exams", { params: { userId: this.currentUserId } });
+    async getExams(api) {
+      const response = await this.$api.get("/exams", { params: { userId: this.currentUserId } });
       return response.data;
     }
   }

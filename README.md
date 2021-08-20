@@ -22,6 +22,6 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ### Useful commands
 ```
 $ npm test
-$ firebase emulators:start --only functions,firestore
-$ firebase emulators:start --only functions,firestore -c firebase.test.json
+$ firebase emulators:start --only functions,firestore,auth
+$ firebase emulators:start --only functions,firestore,auth -c firebase.test.json
 ```

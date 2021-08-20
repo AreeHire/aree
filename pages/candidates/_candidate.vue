@@ -36,8 +36,8 @@ export default {
     }
   },
   async fetch() {
-    const candidate = await getCandidate(this.$axios, this.candidateId);
-    const exam = await getExam(this.$axios, candidate.examId);
+    const candidate = await getCandidate(this.$api, this.candidateId);
+    const exam = await getExam(this.$api, candidate.examId);
 
     this.candidate = candidate;
     this.answers = Object.assign({}, candidate.answers);
@@ -49,13 +49,13 @@ export default {
   }
 };
 
-async function getCandidate(axios, candidateId) {
-  const response = await axios.get(`/candidates/${candidateId}`);
+async function getCandidate(api, candidateId) {
+  const response = await api.get(`/candidates/${candidateId}`);
   return response.data;
 }
 
-async function getExam(axios, examId) {
-  const response = await axios.get(`/exams/${examId}`);
+async function getExam(api, examId) {
+  const response = await api.get(`/exams/${examId}`);
   return response.data;
 }
 </script>

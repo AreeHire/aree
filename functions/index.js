@@ -5,24 +5,24 @@ const cors = require("cors");
 const app = express();
 const uuid4 = require("uuid").v4;
 
+const authenticationMiddleware = require("./authentication");
 const getScore = require("./scoring");
 const getMailer = require("./mailing");
-
 const questions = require("./questions");
-
 const getCandidatesModule = require("./candidates");
-
-app.use(cors({ origin: true }));
-app.use(express.json());
 
 const admin = require("firebase-admin");
 admin.initializeApp();
+
+app.use(cors({ origin: true }));
+app.use(express.json());
+app.use(authenticationMiddleware(admin));
 
 app.get("/", async (req, res) => {
   const examsSnapshot = await admin
     .firestore()
     .collection("exam")
-    .where("userId", "==", req.query.userId)
+    .where("userId", "==", req.locals.user.user_id)
     .get();
 
   const exams = [];
@@ -47,7 +47,8 @@ app.get("/:examId", async (req, res) => {
 
 app.post("/", async (req, res) => {
   const body = req.body;
-  const { name, userId, language, email } = body;
+  const { name, language, email } = body;
+  const { user_id: userId } = req.locals.user;
 
   const exam = {
     name,

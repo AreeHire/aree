@@ -26,13 +26,13 @@ export default {
     return { candidates: [] };
   },
   async fetch() {
-    const candidates = await getCandidates(this.$axios);
+    const candidates = await getCandidates(this.$api);
     this.candidates = candidates;
   }
 };
 
-async function getCandidates(axios) {
-  const response = await axios.get("/candidates");
+async function getCandidates(api) {
+  const response = await api.get("/candidates");
   console.warn(response.data);
   return response.data;
 }
