@@ -10,6 +10,7 @@ const getScore = require("./scoring");
 const getMailer = require("./mailing");
 const questions = require("./questions");
 const getCandidatesModule = require("./candidates");
+const getQuestionsModule = require("./questionsModule");
 
 const admin = require("firebase-admin");
 admin.initializeApp();
@@ -130,3 +131,4 @@ app.post("/", async (req, res) => {
 
 exports.exams = functions.https.onRequest(app);
 exports.candidates = functions.https.onRequest(getCandidatesModule(admin));
+exports.questions = functions.https.onRequest(getQuestionsModule(admin));

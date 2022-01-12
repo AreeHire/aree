@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt-ts",
-    "build": "nuxt-ts build",
-    "start": "nuxt-ts start",
-    "generate": "nuxt-ts generate",
-    "prepare": "husky install"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "prepare": "husky install",
+    "firebase:dev": "NODE_ENV=development firebase emulators:start --only functions,firestore,auth",
+    "firebase:test": "NODE_ENV=test firebase emulators:start --only functions,firestore -c firebase.test.json"
   },
   "dependencies": {
-    "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/auth-next": "^5.0.0-1622918202.e815752",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/firebase": "^7.5.0",
@@ -30,6 +31,8 @@
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^7.16.0",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "ts-jest": "^26.4.4",

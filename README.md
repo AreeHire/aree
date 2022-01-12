@@ -19,9 +19,14 @@ $ npm run generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-### Useful commands
+## Running Dev
+```sh
+$ npm run firebase:dev
+$ npm run dev
 ```
+
+## Running Tests
+```sh
+$ npm run firebase:test
 $ npm test
-$ firebase emulators:start --only functions,firestore,auth
-$ firebase emulators:start --only functions,firestore,auth -c firebase.test.json
 ```
